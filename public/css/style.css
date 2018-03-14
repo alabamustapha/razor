@@ -1,0 +1,72 @@
+.tarificateur {font-size:9pt;color:#000000;font-family:Arial;text-align:justify;}
+.tarificateur input {
+    font-family:Arial;
+    font-size:8pt;
+}
+
+ul
+{
+    font-size:10pt;
+    color:#000000;
+    font-family:Arial;
+}
+
+li
+{
+    margin:6px;
+    font-size:10pt;
+    color:#000000;
+    font-family:Arial;
+}
+.title_espace_pro{
+    background-color: orange!important;
+    font-size:32px;
+}
+
+.img-thumbnail, body{
+    background-color: #e7fbe6!important;
+}
+.btn-orange-a{
+    color: #d08639;
+}
+.btn-orange{
+    background-color: #d08639!important;
+    border-color:#d08639!important;
+    color: white;
+
+}
+/* .navbar{
+    height: 100px !important;
+} */
+
+div#app-navbar-collapse{
+    padding: 30px 0px;
+}
+
+.navbar-brand img{
+    height: 80px;
+}
+
+@media screen and (max-width: 767px) {
+   .navbar-brand{
+       padding: 0;
+   }
+   .navbar-brand img{
+       height: 50px;
+   }
+
+   .navbar-header{
+       padding-top: 20px;
+       padding-bottom: 20px;
+   }
+   #app-navbar-collapse.navbar-collapse{
+       overflow-x: hidden;
+       padding: 0 20px;
+   }
+    /* div#app-navbar-collapse{
+        padding: 0 !important;
+    } */
+
+   
+
+}

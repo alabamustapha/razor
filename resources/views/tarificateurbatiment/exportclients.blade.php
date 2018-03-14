@@ -1,0 +1,19 @@
+<html>
+<head>
+	<title>Export</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>Nom</td>
+            <td>Prénom</td>
+            <td>Email</td>
+        </tr>
+        <tr>
+            <td>Axel</td>
+            <td>CSB</td>
+            <td>axel@csb.paris</td>
+        </tr>
+    </table>
+</body>
+</html>
