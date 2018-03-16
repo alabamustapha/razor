@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -15,11 +13,11 @@
                             <label><strong>Assurance batiment \ Devis</strong> - Etape 2/4</label>
                         </div>
 
-                        <form class="form-horizontal" action="{{ url('tarificateurbatiment/tarifbat_step3') }}" method="post" name="form_proposant_s2">
+                        <form class="form-horizontal" action="<?php echo e(url('tarificateurbatiment/tarifbat_step3')); ?>" method="post" name="form_proposant_s2">
                             <div class="row">
                                 <div class="col-md-6">
                                     
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 
 
                                         <label style="display: block;background:#C0C0C0;color:#000;">LE PROPOSANT</label>                                     
@@ -168,7 +166,7 @@
                                 <div class="col-md-12">
                                     <div class="text-center">
                                         <div class="form_field">
-                                            <a href="{{ url('home') }}">Annuler</a> - <button class="btn-orange-a" style="border: none!important; background-color: transparent" type="submit">Aller à l'étape 3</button>
+                                            <a href="<?php echo e(url('home')); ?>">Annuler</a> - <button class="btn-orange-a" style="border: none!important; background-color: transparent" type="submit">Aller à l'étape 3</button>
                                         </div>
                                     </div>
                                 </div>
@@ -179,12 +177,12 @@
                         
 
 
-                        <!-- <form action="{{ url('tarificateurbatiment/tarifbat_step3') }}" method="post" name="form_proposant_s2">
+                        <!-- <form action="<?php echo e(url('tarificateurbatiment/tarifbat_step3')); ?>" method="post" name="form_proposant_s2">
                             <center>
                                 <table>
                                     <tr>
                                         <td valign="top" width="50%">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 
                                             <table class="tarificateur" cellspacing="0" cellpadding="1">
                                                 <tr bgcolor="#C0C0C0"><td><b>LE PROPOSANT</b></td><td></td></tr>
@@ -218,7 +216,7 @@
                                                 <tr bgcolor="#C0C0C0"><td><b>CARACTERISTIQUES DU RISQUE</b></td><td><b></b></td></tr>
                                                 <tr><td valign="top">Adresse</td><td><textarea name="in_risk_adresse" cols="40" rows="5"></textarea></td></tr>
 
-                                                {{--<tr><td>Code postal</td><td>{{ $coef_zone + 1}}<input type="text" name="in_risk_codepostal" value="" maxlength="3" size="1"></td></tr>--}}
+                                                
 
 
                                                 <tr><td>Code postal</td><td><?php if($coef_zone < 9){ echo '0';} echo $coef_zone + 1; ?><input type="text" name="in_risk_codepostal" value="" maxlength="3" size="1"></td></tr>
@@ -249,7 +247,7 @@
                                     </tr>
                                 </table>
 
-                                <div class="form_field"><a href="{{ url('home') }}">Annuler</a> - <button class="btn-orange-a" style="border: none!important; background-color: transparent" type="submit">Aller à l'étape 3</button>
+                                <div class="form_field"><a href="<?php echo e(url('home')); ?>">Annuler</a> - <button class="btn-orange-a" style="border: none!important; background-color: transparent" type="submit">Aller à l'étape 3</button>
                                 </div>
                             </center>
                         </form> -->
@@ -261,4 +259,5 @@
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

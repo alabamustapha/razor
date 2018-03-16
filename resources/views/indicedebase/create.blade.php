@@ -11,8 +11,8 @@
 
                         {!! Form::open(array(
                         'route' => 'indicedebase.store',
-                         'method' => 'POST')) !!}
-
+                         'method' => 'POST', 'class' => 'form-horizontal')) !!}
+                        
                         {!! Form::label('indice', 'Indice') !!}
                         {!! Form::text('indice', null,
                         ['class' => 'form-control',
@@ -25,9 +25,9 @@
 
 
                         {!! Form::submit('Ajouter',
-                        ['class' => 'btn btn-group-justified']) !!}
+                        ['class' => 'btn btn-group-justified', 'style' => 'margin-top:10px;']) !!}
 
-                        <style>.btn-group-justified{background-color: lightsteelblue}</style>
+                        <style>.btn-group-justified{background-color: lightsteelblue;}</style>
 
 
                         {!! Form::close() !!}

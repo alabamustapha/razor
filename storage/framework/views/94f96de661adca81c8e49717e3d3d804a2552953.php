@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="<?php echo e(app()->getLocale()); ?>">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
     <title>Residassur.fr</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <!-- <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet"> -->
-    <!-- <link href="{{ asset('css/datatables.bootstrap.min.css') }}" rel="stylesheet"> -->
+    <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
+    <!-- <link href="<?php echo e(asset('css/datatables.min.css')); ?>" rel="stylesheet"> -->
+    <!-- <link href="<?php echo e(asset('css/datatables.bootstrap.min.css')); ?>" rel="stylesheet"> -->
     <!-- <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet"> -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('css/style.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/font-awesome.css')); ?>" rel="stylesheet">
 
-    @yield('styles')
+    <?php echo $__env->yieldContent('styles'); ?>
 </head>
 
 <body>
@@ -38,8 +38,8 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/home') }}" style="display: inline-table;">
-                    <img style="height: 80px;" src="{{ asset('../images/LogoResidassur.jpg')}}" alt="Groupe corim assurance">
+                <a class="navbar-brand" href="<?php echo e(url('/home')); ?>" style="display: inline-table;">
+                    <img style="height: 80px;" src="<?php echo e(asset('../images/LogoResidassur.jpg')); ?>" alt="Groupe corim assurance">
                 </a>
             </div>
 
@@ -52,36 +52,37 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="{{ route('login') }}">Login</a></li>
-                        <li><a href="{{ route('register') }}">Register</a></li>
-                    @else
-                        <li><img style="height: 80px;" src="{{ asset('../images/logo.png')}}" alt="Groupe corim assurance"></li>
+                    <?php if(Auth::guest()): ?>
+                        <li><a href="<?php echo e(route('login')); ?>">Login</a></li>
+                        <li><a href="<?php echo e(route('register')); ?>">Register</a></li>
+                    <?php else: ?>
+                        <li><img style="height: 80px;" src="<?php echo e(asset('../images/logo.png')); ?>" alt="Groupe corim assurance"></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->aff_fname }} {{ Auth::user()->aff_lname }} <span class="caret"></span>
+                                <?php echo e(Auth::user()->aff_fname); ?> <?php echo e(Auth::user()->aff_lname); ?> <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('home') }}">Revenir au tarificateur</a></li>
-                                @if(Auth::check() && Auth::user()->isAdmin)
-                                    <li><a href="{{ url('admin') }}">Admin</a></li>
-                                @endif
+                                <li><a href="<?php echo e(url('home')); ?>">Revenir au tarificateur</a></li>
+                                <?php if(Auth::check() && Auth::user()->isAdmin): ?>
+                                    <li><a href="<?php echo e(url('admin')); ?>">Admin</a></li>
+                                <?php endif; ?>
                                 <li role="separator" class="divider"></li>
                                 <li>
-                                    <a href="{{ route('logout') }}"
+                                    <a href="<?php echo e(route('logout')); ?>"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         Déconnexion
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
+                                    <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                                        <?php echo e(csrf_field()); ?>
+
                                     </form>
                                 </li>
                             </ul>
                         </li>
-                    @endif
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -94,13 +95,13 @@
                 </div>
                 <div class="btn-group btn-group-justified hidden-xs" role="group" aria-label="...">
                     <div class="btn-group" role="group">
-                        <a href="{{ url('/indicedebase') }}" class="btn btn-default">Accueil</a>
+                        <a href="<?php echo e(url('/indicedebase')); ?>" class="btn btn-default">Accueil</a>
                     </div>
                     <div class="btn-group" role="group">
-                        <a href="{{ url('/user') }}" class="btn btn-default">Gérer affiliés</a>
+                        <a href="<?php echo e(url('/user')); ?>" class="btn btn-default">Gérer affiliés</a>
                     </div>
                     <div class="btn-group" role="group">
-                        <a href="{{ url('tarificateurbatiment/index') }}" class="btn btn-default">Gèrer devis et contrats</a>
+                        <a href="<?php echo e(url('tarificateurbatiment/index')); ?>" class="btn btn-default">Gèrer devis et contrats</a>
                     </div>
                     <div class="btn-group" role="group">
                         <a href="#" class="btn btn-default">Extraction des contrats</a>
@@ -109,13 +110,13 @@
 
                 <div class="btn-group btn-group-vertical visible-xs" role="group" aria-label="...">
                     <div class="btn-group" role="group">
-                        <a href="{{ url('/indicedebase') }}" class="btn btn-default">Accueil</a>
+                        <a href="<?php echo e(url('/indicedebase')); ?>" class="btn btn-default">Accueil</a>
                     </div>
                     <div class="btn-group" role="group">
-                        <a href="{{ url('/user') }}" class="btn btn-default">Gérer affiliés</a>
+                        <a href="<?php echo e(url('/user')); ?>" class="btn btn-default">Gérer affiliés</a>
                     </div>
                     <div class="btn-group" role="group">
-                        <a href="{{ url('tarificateurbatiment/index') }}" class="btn btn-default">Gèrer devis et contrats</a>
+                        <a href="<?php echo e(url('tarificateurbatiment/index')); ?>" class="btn btn-default">Gèrer devis et contrats</a>
                     </div>
                     <div class="btn-group" role="group">
                         <a href="#" class="btn btn-default">Extraction des contrats</a>
@@ -127,10 +128,10 @@
                 <div class="col-md-12">
                     <div class="btn-group btn-group-justified" role="group" aria-label="...">
                         <div class="btn-group" role="group">
-                            <a href="{{ url('#') }}" class="btn btn-default">CMAM</a>
+                            <a href="<?php echo e(url('#')); ?>" class="btn btn-default">CMAM</a>
                         </div>
                         <div class="btn-group" role="group">
-                            <a href="{{ url('#') }}" class="btn btn-default">Groupama</a>
+                            <a href="<?php echo e(url('#')); ?>" class="btn btn-default">Groupama</a>
                         </div>
                     </div>
                 </div>
@@ -138,13 +139,13 @@
 
     </div>
     <br>
-    @yield('content')
+    <?php echo $__env->yieldContent('content'); ?>
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/datatables.min.js') }}"></script>
+<script src="<?php echo e(asset('js/app.js')); ?>"></script>
+<script src="<?php echo e(asset('js/datatables.min.js')); ?>"></script>
 
-@yield('scripts')
+<?php echo $__env->yieldContent('scripts'); ?>
 </body>
 </html>

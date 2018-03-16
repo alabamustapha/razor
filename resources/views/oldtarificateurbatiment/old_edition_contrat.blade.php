@@ -27,7 +27,7 @@
 
                             </table>
                         </div>
-                        <div class="container">
+                        <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-5">
                                     <p>Les étapes suivants ont été passées et historisées sur ce dossier :</p>
@@ -58,11 +58,11 @@
                         @elseif(App\Models\TarificateurBatiment::search_status($old_tarif_bat->status, "20-"))
 
                             <center>
-                                <form action="{{ route('oldeditioncontratpost2', $old_tarif_bat->id) }}" method="post" name="form_post_devis_ou_contrat">
+                                <form class="form-horizontal" action="{{ route('oldeditioncontratpost2', $old_tarif_bat->id) }}" method="post" name="form_post_devis_ou_contrat">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                     <b>Quel est l'état actuel du devis ?</b><br><br>
-                                    <select name="add_status">
+                                    <select name="add_status" class="form-control">
                                         @if(App\Models\TarificateurBatiment::type_to_label($old_tarif_bat->type_product) == "habitation")
                                             <option value="'21-'time().';25-'.time().';26-'.time().';50-'.time().';60-'.time().';70-'.time().';30-'.time().';"></option>
                                             <option value="<?php echo '21-'.time().';25-'.time().';26-'.time().';50-'.time().';60-'.time().';70-'.time().';30-'.time().';'?>">{{App\Models\TarificateurBatiment::status_to_label1(20)}};{{App\Models\TarificateurBatiment::status_to_label1(21)}}</option>
@@ -79,16 +79,16 @@
                                     </select>
                                     <br>Date d'effet du contrat :<input type="text" name="in_date_contract_days" value="<?php echo date("d",time()) ?>" size="1">/<input type="text" name="in_date_contract_months" value="<?php echo date("m",time()) ?>" size="1">/<input type="text" name="in_date_contract_years" value="<?php echo date("Y",time()) ?>" size="3">
                                     <br>Périodicité : <input type="radio" name="in_periodicity" value="1" checked>Annuelle <input type="radio" name="in_periodicity" value="2">Semestrielle <input type="radio" name="in_periodicity" value="4">Trimestrielle <input type="radio" name="in_periodicity" value="12">Mensuelle
-                                    <br><a class="btn-orange-a" href="{{ route('oldeditioncontrat', $old_tarif_bat->id) }}">Retour</a>- <button type="submit">Valider</button>
+                                    <br><a class="btn-orange-a" href="{{ route('oldeditioncontrat', $old_tarif_bat->id) }}">Retour</a>- <button class="btn btn-orange" type="submit">Valider</button>
                                 </form>
                             </center>
                         @elseif(App\Models\TarificateurBatiment::search_status($old_tarif_bat->status, "10-") || App\Models\TarificateurBatiment::search_status($old_tarif_bat->status, "11-"))
                             <center>
-                                <form action="{{ route('oldeditioncontratpost', $old_tarif_bat->id) }}" method="post" name="form_post_devis_ou_contrat">
+                                <form class="form-horizontal" action="{{ route('oldeditioncontratpost', $old_tarif_bat->id) }}" method="post" name="form_post_devis_ou_contrat">
                                     <b>Quel est l'état actuel du devis ?</b><br><br>
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                                    <select name="add_status">
+                                    <select class="form-control" name="add_status">
                                         <option value="<?php echo '11-'.time().';35-'.time().';'?>">{{App\Models\TarificateurBatiment::status_to_label1(11)}};{{App\Models\TarificateurBatiment::status_to_label1(35)}}</option>
                                         <option value="<?php echo '20-'.time().';31-'.time().';'?>">{{App\Models\TarificateurBatiment::status_to_label1(20)}};{{App\Models\TarificateurBatiment::status_to_label1(31)}}</option>
                                         <option value="<?php echo '20-'.time().';32-'.time().';'?>">{{App\Models\TarificateurBatiment::status_to_label1(20)}};{{App\Models\TarificateurBatiment::status_to_label1(32)}}</option>
@@ -99,7 +99,7 @@
                                     </select>
                                     <br>
                                     <br>
-                                    <a class="btn-orange-a" href="{{ route('oldeditioncontrat', $old_tarif_bat->id) }}">Retour</a>- <button type="submit" class="btn-orange">Valider</button>
+                                    <a class="btn-orange-a" href="{{ route('oldeditioncontrat', $old_tarif_bat->id) }}">Retour</a>- <button type="submit" class="btn btn-orange">Valider</button>
                                 </form>
                             </center>
                         @else

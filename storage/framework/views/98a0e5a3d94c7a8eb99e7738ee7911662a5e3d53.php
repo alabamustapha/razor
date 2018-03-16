@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
@@ -9,7 +7,7 @@
 
 
                 $.ajax({
-                    url: '{{ URL::action('TarificateurBatimentController@result_tarif_batiment') }}',
+                    url: '<?php echo e(URL::action('TarificateurBatimentController@result_tarif_batiment')); ?>',
                     type: 'POST',
                     data: $('#tarificateur_batiment').serialize(),
                     success: function(reponse) {
@@ -30,7 +28,7 @@
                     } else {}
 
                     $.ajax({
-                        url: '{{ URL::action('TarificateurBatimentController@result_tarif_batiment') }}',
+                        url: '<?php echo e(URL::action('TarificateurBatimentController@result_tarif_batiment')); ?>',
                         type: 'POST',
                         data: $(this).serialize(),
                         success: function(reponse) {
@@ -52,7 +50,7 @@
                     <div class="panel-body">
 
                         <form class="form-horizontal" id="tarificateur_batiment" action="">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 
                             <div class="row">
                                 <div class="col-md-5">
@@ -64,14 +62,14 @@
                                     <div class="form-group">
                                         <label for="in_nombre_sinistres" class="col-md-4 control-label">Nombre de sinistres / 36 mois</label>
                                         <div class="col-md-8">
-                                            <input name="in_nombre_sinistres" value="{{$value_in_nombre_sinistre}}" class="form-control" type="text" placeholder="1" size="3"> sinistre(s)
+                                            <input name="in_nombre_sinistres" value="<?php echo e($value_in_nombre_sinistre); ?>" class="form-control" type="text" placeholder="1" size="3"> sinistre(s)
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="in_nombre_surface" class="col-md-4 control-label">Surface développée</label>
                                         <div class="col-md-8">
-                                            <input name="in_nombre_surface" value="{{$value_in_nombre_surface}}" class="form-control" type="text" size="3"> m2
+                                            <input name="in_nombre_surface" value="<?php echo e($value_in_nombre_surface); ?>" class="form-control" type="text" size="3"> m2
                                         </div>
                                     </div>
 
@@ -166,11 +164,11 @@
                                                     <td valign="top">
                                                         <table class="tarificateur" cellspacing="0" cellpadding="1">
                                                             <tr bgcolor="#C0C0C0"><td valign="middle">&nbsp;+ <b>CONTEXTE CLIENT</b></td><td><td></tr>
-                                                            <tr><td valign="middle">Nombre de sinistres / 36 mois</td><td><input type="text" name="in_nombre_sinistres" value="{{$value_in_nombre_sinistre}}" placeholder="1" size="3"> sinistre(s)</td></tr>
-                                                            <tr><td valign="middle">Surface développée</td><td><input type="text" name="in_nombre_surface" value="{{$value_in_nombre_surface}}" size="3"> m2</td></tr>
+                                                            <tr><td valign="middle">Nombre de sinistres / 36 mois</td><td><input type="text" name="in_nombre_sinistres" value="<?php echo e($value_in_nombre_sinistre); ?>" placeholder="1" size="3"> sinistre(s)</td></tr>
+                                                            <tr><td valign="middle">Surface développée</td><td><input type="text" name="in_nombre_surface" value="<?php echo e($value_in_nombre_surface); ?>" size="3"> m2</td></tr>
                                                             <tr><td valign="middle">Département</td><td><?php echo App\Models\TarificateurBatiment::display_select($coef_zone, "in_coef_zone") ?></td></tr>
                                                             <tr><td valign="middle">Aggravation occupation</td><td><?php echo App\Models\TarificateurBatiment::display_select($coef_aggravation_occupation, "in_coef_aggravation_occupation")?></td></tr>
-                                                            {{-- Ne pas decommenté           <tr><td valign="middle">Catégorie batiment</td><td>'.display_select($coef_categorie_batiment, "in_coef_categorie_batiment").'</td></tr> --}}
+                                                            
                                                             <tr><td valign="middle">Année de construction</td><td><?php echo App\Models\TarificateurBatiment::display_select($coef_annee_construction, "in_coef_annee_construction")?></td></tr>
                                                             <tr><td valign="middle">Antécédents</td><td><?php echo App\Models\TarificateurBatiment::display_select($coef_antecedents, "in_coef_antecedents") ?> <td></tr>
                                                         </table>
@@ -185,7 +183,7 @@
                                                             <tr><td><input type="radio" name="in_nombre_baux" value="1"> Oui <input type="radio" name="in_nombre_baux" value="-1" checked> Non &nbsp;&nbsp;&nbsp;Protection juridique étendu</td></tr>
 
                                                             <tr><td><?php echo App\Models\TarificateurBatiment::display_radio($coef_minorations_possibles, "in_coef_minorations_possibles")?></td></tr>
-                                                            {{-- Ne pas decommenté               <tr><td>'.display_radio($protection_juridique_etendu, "in_protection_juridique_etendu").'</td></tr>'; --}}
+                                                            
                                                         </table>
                                                     </td>
                                                     <td valign="top">
@@ -206,4 +204,5 @@
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -28,13 +28,19 @@ Route::resource('/indicedebase', 'IndiceDeBaseController');
 /* Route pour gérer le tarificateur batiment */
 Route::get('/tarificateurbatiment/index', [
    'uses' => 'TarificateurBatimentController@index1']);
+
 Route::post('/tarificateurbatiment/result_tarif_batiment', 'TarificateurBatimentController@result_tarif_batiment');
+
 Route::get('/tarificateurbatiment/tarifbat_step2', 'TarificateurBatimentController@step2');
+
 Route::post('/tarificateurbatiment/tarifbat_step3', 'TarificateurBatimentController@step3');
+
 Route::get('/tarificateurbatiment/tarifbat_step4', 'TarificateurBatimentController@step4');
+
 Route::get('/tarificateurbatiment/report', [
     'middleware' => 'isadmin',
     'uses' => 'ReportController@show'])->name('show_report');
+
 Route::get('/tarificateurbatiment/editioncontrat/{id}', [
     'middleware' => 'isadmin',
     'uses' => 'TarificateurBatimentController@edition_contrat'])->name('editioncontrat');

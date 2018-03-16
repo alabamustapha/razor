@@ -15,7 +15,7 @@ class TarificateurGroupama extends Model
     public static function display_select($tab, $name, $multiple = 0, $value = 0)
     {
 
-        $ret = '<select name="'.$name.'" style="width:190px;"';
+        $ret = '<select name="'.$name.'" style="width:190px;" class="form-control"';
         if ($multiple)
             $ret .= 'multiple="multiple" size="'.sizeof($tab['designation']).'"';
         $ret .= '>';
