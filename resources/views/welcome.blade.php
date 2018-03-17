@@ -79,11 +79,11 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 col-sm-12 text-center">
                 <div>
-                    <img class="img-responsive" src="{{ asset('images/logo_transparent.png') }}" alt="Groupe corim assurance">
+                    <img src="{{ asset('images/logo_transparent.png') }}" class="img-responsive" alt="Groupe corim assurance">
                 </div>
                 <div class="flex-center">
                     <h3>Bienvenue sur l'espace professionnel</h3>
