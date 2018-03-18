@@ -12,7 +12,7 @@
 
                         {!! Form::open(array(
                         'route' => 'user.store',
-                         'method' => 'POST')) !!}
+                         'method' => 'POST', 'class' => 'form-horizontal')) !!}
 
                         {!! Form::label('email', 'Adresse email') !!}
                         {!! Form::text('email', null,

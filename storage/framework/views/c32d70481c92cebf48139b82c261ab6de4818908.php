@@ -1,6 +1,4 @@
-@extends('layouts.admin')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
@@ -8,7 +6,7 @@
                     <div class="panel-heading"><h3>Les affiliés</h3></div>
                     <div class="panel-body">
                         <h4>Gestion des affilié et des courtiers</h4>
-                        <a href="{{ route('user.create')}}"><i class="fa fa-plus-circle" aria-hidden="true"></i>Ajouter un affilié</a>
+                        <a href="<?php echo e(route('user.create')); ?>"><i class="fa fa-plus-circle" aria-hidden="true"></i>Ajouter un affilié</a>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -25,51 +23,50 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($user as $user_affil)
+                                <?php $__currentLoopData = $user; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user_affil): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
 
 
-                                        <td>@if($user_affil->aff_status_approved == 1)
+                                        <td><?php if($user_affil->aff_status_approved == 1): ?>
                                                 <p style="color: green">Actif</p>
 
-                                            @else
+                                            <?php else: ?>
                                                 <p style="color: red">Inactif</p>
 
-                                            @endif</td>
+                                            <?php endif; ?></td>
 
                                         <td>
-                                            @if($user_affil->aff_civility == 0)
+                                            <?php if($user_affil->aff_civility == 0): ?>
                                                 M.
-                                            @else
+                                            <?php else: ?>
                                                 Mme.
-                                            @endif
-                                            {{ $user_affil->aff_lname }}</td>
-                                        <td>{{$user_affil->aff_fname }}</td>
-                                        <td>{{ $user_affil->aff_city }}</td>
-                                        <td>{{ $user_affil->created_at }}</td>
-                                        <td>{{ $user_affil->updated_at }}</td>
+                                            <?php endif; ?>
+                                            <?php echo e($user_affil->aff_lname); ?></td>
+                                        <td><?php echo e($user_affil->aff_fname); ?></td>
+                                        <td><?php echo e($user_affil->aff_city); ?></td>
+                                        <td><?php echo e($user_affil->created_at); ?></td>
+                                        <td><?php echo e($user_affil->updated_at); ?></td>
                                         <td><?php foreach($user_aff as $user_count){
                                               echo  count($user_count->aff_link == $user_affil->id);
                                             }?>
 
                                         </td>
-                                        <td>{{ $user_affil->aff_ref }}</td>
-                                        <td><a href="{{ route('user.edit', $user_affil->id)}}"><i class="fa fa-pencil-square-o"></i></a>
+                                        <td><?php echo e($user_affil->aff_ref); ?></td>
+                                        <td><a href="<?php echo e(route('user.edit', $user_affil->id)); ?>"><i class="fa fa-pencil-square-o"></i></a>
                                             <a href=""><i style="color: red;" class="fa fa-times" aria-hidden="true"></i></a><br>
-                                            <a href="{{route('courtier_affilie', $user_affil->id)}}">Gérer les courtiers</a>
+                                            <a href="<?php echo e(route('courtier_affilie', $user_affil->id)); ?>">Gérer les courtiers</a>
                                         </td>
                                     </tr>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>
 
-                        {{--  {!! Form::model($indice, array('route' => ['indicedebase.destroy', $indice->id], 'method' => 'DELETE')) !!}
-                                       {{ Form::button('<i class="fa fa-trash-o"></i>', array('class'=>'btn btn-danger btn-xs', 'type'=>'submit')) }}
-                                       {!! Form::close() !!} --}}
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
