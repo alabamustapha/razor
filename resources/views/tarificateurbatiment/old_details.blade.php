@@ -16,7 +16,7 @@
                         <ul>
                             <li><a class="btn-orange-a" target="_blank" href="{{url('old_devis_bat?id='.$old_tarif_bat->id)}}">Télécharger le devis</a></li>
                         </ul>
-                        <center><a class="btn-orange-a" href="{{url('/home')}}">Retour</a></center>
+                        <div class="text-center"><a class="btn-orange-a" href="{{url('/home')}}">Retour</a></div>
                     </div>
                 </div>
             </div>

@@ -9,11 +9,11 @@
 
                         {!! Form::open(array(
                         'url' => 'tarificateurbatiment/result_search',
-                         'method' => 'PUT')) !!}
+                         'method' => 'PUT', 'class' => 'form-horizontal')) !!}
 
-                        {!! Form::select('type_product', array('0' => 'Nouveau Devis', '1' => 'Ancien Devis')) !!}
+                        {!! Form::select('type_product', array('0' => 'Nouveau Devis', '1' => 'Ancien Devis'),null, ['class' => 'form-control']) !!}
 
-                        {!! Form::select('product_choice', array('0' => 'N° Devis', '1' => 'Par courtier')) !!}
+                        {!! Form::select('product_choice', array('0' => 'N° Devis', '1' => 'Par courtier'), null, ['class' => 'form-control'] ) !!}
                         
                         {!! Form::text('search', null,
                         ['class' => 'form-control',

@@ -27,7 +27,7 @@
                                 <li><a class="btn-orange-a" target="_blank" href="{{ route('modif_batiment_step_1',$tarif_bat->id) }}">Modifier le devis</a></li>
                             @endif
                         </ul>
-                        <center><a class="btn-orange-a" href="{{url('/home')}}">Retour</a></center>
+                        <div class="text-center"><a class="btn-orange-a" href="{{url('/home')}}">Retour</a></div>
                     </div>
                 </div>
             </div>

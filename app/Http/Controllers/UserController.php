@@ -31,6 +31,7 @@ class UserController extends Controller
         //dd($user_affi, $user);
         return view('user.index', compact('user', 'user_aff'));
     }
+    
     public function test_index(){
         $user_aff = DB::table('users')->get();
 
