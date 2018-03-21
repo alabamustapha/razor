@@ -10,6 +10,7 @@
                     <div class="panel-body text-center">
                         <a href="{{ url('tarificateurbatiment') }}" style="background-color:#d08639!important; border-color: #d08639!important;margin-bottom:5px;" class="btn btn-primary">Tarificateur Bâtiment inférieur à 1500m2</a>
                         <a href="{{ url('tarificateurgroupama/nbr_sinistre') }}" style="background-color:#d08639!important; border-color: #d08639!important;margin-bottom:5px;" class="btn btn-primary">Tarificateur Bâtiment supérieur à 1500m2</a>
+                        <a href="{{ url('activia') }}" style="background-color:#d08639!important; border-color: #d08639!important;margin-bottom:5px;" class="btn btn-primary">Activia</a>
                     </div>
                 </div>
             </div>

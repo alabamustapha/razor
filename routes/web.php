@@ -31,6 +31,7 @@ Route::get('/tarificateurbatiment/index', [
 
 Route::post('/tarificateurbatiment/result_tarif_batiment', 'TarificateurBatimentController@result_tarif_batiment');
 
+
 Route::get('/tarificateurbatiment/tarifbat_step2', 'TarificateurBatimentController@step2');
 
 Route::post('/tarificateurbatiment/tarifbat_step3', 'TarificateurBatimentController@step3');
@@ -88,6 +89,12 @@ Route::resource('/tarificateurbatiment', 'TarificateurBatimentController');
 Route::resource('/clauses', 'ClausesController');
 
 
+/* Route for activia products*/ 
+
+Route::get('/activia', 'ActiviaController@index');
+Route::post('/activia/result', 'ActiviaController@result');
+Route::get('/activia/step2', 'ActiviaController@step2')->name('activia_step2');
+Route::post('/activia/step3', 'ActiviaController@step3')->name('activia_step3');
 /* Route pour convertir affilié en courtier */
 Route::post('/user/update_afflink_post/{id}', 'UserController@update_afflink_post')->name('update_afflink_post');
 Route::post('/user/update_afflink_post2/{id}', 'UserController@update_afflink_post2')->name('update_afflink_post2');
