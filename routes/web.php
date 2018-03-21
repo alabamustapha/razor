@@ -95,6 +95,8 @@ Route::get('/activia', 'ActiviaController@index');
 Route::post('/activia/result', 'ActiviaController@result');
 Route::get('/activia/step2', 'ActiviaController@step2')->name('activia_step2');
 Route::post('/activia/step3', 'ActiviaController@step3')->name('activia_step3');
+Route::get('/activia/step4', 'ActiviaController@step4')->name('activia_step4');
+
 /* Route pour convertir affilié en courtier */
 Route::post('/user/update_afflink_post/{id}', 'UserController@update_afflink_post')->name('update_afflink_post');
 Route::post('/user/update_afflink_post2/{id}', 'UserController@update_afflink_post2')->name('update_afflink_post2');

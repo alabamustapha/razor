@@ -159,9 +159,64 @@ class ActiviaController extends Controller
 
         $costumer = $request->except('_token');
 
-        Session::put("activia_costumer", $costumer);
+        \Session::put("activia_costumer", $costumer);
 
 
         return view('activia.step3');
+    }
+
+    public function step4(){
+        $costumer_sigle = \Session::get('costumer.in_customer_sigle');
+        $costumer_nom = \Session::get('costumer.in_customer_nom');
+        $result_rc = \Session::get('result.rc');
+        //$all_clauses = Session::get('result.clauses');
+        //$test = Session::all();
+        $product_n = session('result');
+        $proposant_n = session('costumer');
+        dd(\Session::all());
+        $product = serialize($product_n);
+        $proposant = serialize($proposant_n);
+        $date = date("Y-m-d");
+
+        DB::table('devis')->insert([
+            [
+                'id_contrat' => -1,
+                'affiliate_users' => Auth::user()->id,
+                'type_product' => 4,
+                'data_product' => $product,
+                'data_proposant' => $proposant,
+                'customer_nom' => $costumer_sigle . ' ' . $costumer_nom,
+                'affiliate_lastname' => Auth::user()->aff_lname,
+                'affiliate_firstname' => Auth::user()->aff_fname,
+                'affiliate_company' => Auth::user()->aff_company,
+                'affiliate_address' => Auth::user()->aff_adresse,
+                'affiliate_city' => Auth::user()->aff_city,
+                'affiliate_zip' => Auth::user()->aff_zip,
+                'affiliate_email' => Auth::user()->email,
+                'affiliate_orias' => Auth::user()->aff_orias,
+                'affiliate_tel' => Auth::user()->aff_tel,
+                'affiliate_ref' => Auth::user()->aff_ref,
+                'date_creation' => $date,
+                'status' => '100-' . time() . ';10-' . time() . ';',
+                'formule' => '',
+                'periodicity' => 1,
+                'tarificateur_amount' => 0.00,
+                'customer_amount' => 0.00,
+                'partner_amount' => 0.00,
+                'affiliate_amount' => 0.00,
+                'customer_amount_rc' => 0.00,
+                'date_contract' => 0,
+                'clauses' => '',
+
+
+
+            ],
+
+        ]);
+
+        $ref_contrat = DB::table('devis')->where('affiliate_users', Auth::user()->id)->pluck('id', 'id')->last();
+        //dd($costumer_sigle, $costumer_nom, $product, $proposant,  $result_rc, $ref_contrat);
+        $contrat = $ref_contrat;
+        return view('tarificateurgroupama.tarifgroupama_step4', compact('contrat'));
     }
 }
