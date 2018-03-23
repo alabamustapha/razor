@@ -5,7 +5,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $("input").keypress(function () {
+            $("input, select").change(function () {
 
 
                 $.ajax({
@@ -18,27 +18,27 @@
                     }
                 });
 
-                $('#activia_batiment').change(function() {
-                    // if (tarificateur_batiment.in_nombre_sinistres.value_in_nombre_sinistre < 0 ||  (parseInt(tarificateur_batiment.in_nombre_sinistres.value_in_nombre_sinistre) != tarificateur_batiment.in_nombre_sinistres.value_in_nombre_sinistre))
-                    // {
-                    //     tarificateur_batiment.in_nombre_sinistres.value_in_nombre_sinistre = 0;
-                    //     alert("Le nombre de sinistre(s) est égal à 0 ou supérieur.");
-                    // } else if (tarificateur_batiment.in_nombre_surface.value_in_nombre_surface > 1500 ||  (parseInt(tarificateur_batiment.in_nombre_surface.value_in_nombre_surface)!=tarificateur_batiment.in_nombre_surface.value_in_nombre_surface))
-                    // {
-                    //     tarificateur_batiment.in_nombre_surface.value_in_nombre_surface = 0;
-                    //     alert("La surface développée ne peut être supérieure à 1500 m2.");
-                    // } else {}
+                // $('#activia_batiment').change(function() {
+                //     // if (tarificateur_batiment.in_nombre_sinistres.value_in_nombre_sinistre < 0 ||  (parseInt(tarificateur_batiment.in_nombre_sinistres.value_in_nombre_sinistre) != tarificateur_batiment.in_nombre_sinistres.value_in_nombre_sinistre))
+                //     // {
+                //     //     tarificateur_batiment.in_nombre_sinistres.value_in_nombre_sinistre = 0;
+                //     //     alert("Le nombre de sinistre(s) est égal à 0 ou supérieur.");
+                //     // } else if (tarificateur_batiment.in_nombre_surface.value_in_nombre_surface > 1500 ||  (parseInt(tarificateur_batiment.in_nombre_surface.value_in_nombre_surface)!=tarificateur_batiment.in_nombre_surface.value_in_nombre_surface))
+                //     // {
+                //     //     tarificateur_batiment.in_nombre_surface.value_in_nombre_surface = 0;
+                //     //     alert("La surface développée ne peut être supérieure à 1500 m2.");
+                //     // } else {}
 
-                    $.ajax({
-                        url: '{{ URL::action('ActiviaController@result') }}',
-                        type: 'POST',
-                        data: $(this).serialize(),
-                        success: function(reponse) {
-                            console.log(reponse)
-                            $('div#result').html(reponse);
-                        }
-                    });
-                });
+                //     $.ajax({
+                //         url: '{{ URL::action('ActiviaController@result') }}',
+                //         type: 'POST',
+                //         data: $(this).serialize(),
+                //         success: function(reponse) {
+                //             console.log(reponse)
+                //             $('div#result').html(reponse);
+                //         }
+                //     });
+                // });
             });
         });
 
