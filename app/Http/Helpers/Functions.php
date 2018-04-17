@@ -717,18 +717,23 @@ function i25($profession_ref, $activia_option_1, $surface_of_property){
 
 function i36($i25, $request){
     //G27: if activia_option_2 I25 * 0.30 else 0
-    $G27 = $request->activia_option_1 == 1 ? 0.30 * $i25 : 0;
-                                //G28: if activia_option_3 I25 * 1 else 0
+    $G27 = $request->activia_option_2 == 1 ? 0.30 * $i25 : 0;
+    
+    //G28: if activia_option_3 I25 * 1 else 0
     $G28 = $request->activia_option_3 == 1 ? 1 * $i25 : 0;    
-                                //G29: if activia_option_4 I25 * 0.30 else 0
+    //G29: if activia_option_4 I25 * 0.30 else 0
     $G29 = $request->activia_option_4 == 1 ? 0.30 * $i25 : 0;    
-                                //G30: if activia_option_5 I25 * 0.50 else 0
+    
+    //G30: if activia_option_5 I25 * 0.50 else 0
     $G30 = $request->activia_option_5 == 1 ? 0.5 * $i25 : 0;    
-                                //G31: if activia_option_6 I25 * 0.25 else 0
-    $G31 = $request->activia_option_5 == 1 ? 0.25 * $i25 : 0;    
-                                //G32: if activia_option_7 I25 * 0.20 else 0
+    
+    //G31: if activia_option_6 I25 * 0.25 else 0
+    $G31 = $request->activia_option_6 == 1 ? 0.25 * $i25 : 0;    
+    
+    //G32: if activia_option_7 I25 * 0.20 else 0
     $G32 = $request->activia_option_7 == 1 ? 0.20 * $i25 : 0;       
-                                //G33: if activia_option_8 I25 * 0.25 else 0
+    
+    //G33: if activia_option_8 I25 * 0.25 else 0
     $G33 = $request->activia_option_8 == 1 ? 0.25 * $i25 : 0;       
                                 //G34: 0.4 * I25
     $G34 = 0.4 * $i25;           

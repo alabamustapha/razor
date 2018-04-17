@@ -64,7 +64,7 @@ class ActiviaController extends Controller
                             // I36: G27 + G28 + G29 + G30 + G31 + G32 + G33 + G34 + G35 + G36
 
                                 $I36 = i36($I25, $request);
-                                
+
                     $I42 = i42($I25, $I36);
 
             //I152 = 0
@@ -120,6 +120,7 @@ class ActiviaController extends Controller
 
         $response = "<div><u>Tarifs:</u><center><table class='tarificateur'><tr><td>PNO : &nbsp </td><td> " . $total . " </td> <td> &nbsp euros </td> </tr></table> </center><br><u>Clauses: </u><center><table class='tarificateur'><tr><td>PNO :</td><td></td></tr></table> </center></div><br><div class='form_field'><a href='" . route('home') . "'> Annuler</a>-<a class='btn-orange-a' href='" . route('activia_step2') . "'> Aller &agrave;l'&eacute;tape 2</a></div>";
 
+        // return $I36;
         return $response;
     }
 
