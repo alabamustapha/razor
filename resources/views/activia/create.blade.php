@@ -70,14 +70,26 @@
                                             <input name="surface_of_property" class="form-control" type="number" size="3" value="900"> m2
                                         </div>
                                     </div>
-                                   
-                                   
                                     <div class="form-group">
                                         <label for="location" class="col-md-4 control-label">Location</label>
                                         <div class="col-md-8">
                                             <input name="location" class="form-control" type="number" placeholder="1" max="3" min="1" value="3"> 
                                         </div>
                                     </div>
+                                   
+                                    <div class="form-group">
+                                        <label for="objets_de_miroiterie_extérieurs" class="col-md-4 control-label">Objets de miroiterie extérieurs </label>
+                                        <div class="col-md-8">
+                                            <input name="objets_de_miroiterie_extérieurs" class="form-control" type="number" value="200"> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="avec_franchise_de" class="col-md-4 control-label">Avec franchise de 1/3 x l'indice </label>
+                                        <div class="col-md-8">
+                                            <input name="avec_franchise_de" class="form-control" type="number" value="200"> 
+                                        </div>
+                                    </div>
+                                   
 
                                    
 

@@ -38,13 +38,13 @@ class ActiviaController extends Controller
                         
                     //I88 =  G85+G86+G87+G88 ----> 0.62 + 0 + 0 + 0
 
-                        $I88 = i88();
+                        $I88 = i88($request->avec_franchise_de);
                         
                     //I82 = 0
                         $I82 = i82();
                         
                     //I78 = activia_option_12 = 47.0
-                        $I78 = i78($classe_de_rique_pour_contole['bg']);
+                        $I78 = i78($classe_de_rique_pour_contole['bg'], $request->objets_de_miroiterie_extérieurs);
                         
                     //I69 = 0
                         $I69 = i69();
@@ -70,8 +70,8 @@ class ActiviaController extends Controller
             //I152 = 0
             $I152 = i152();
         
-            //I141 (G120+G121+G122+G124+G125+G126+G127+G128+G130+G131+G132+G133+G134+G136+G137+G138+G139+G140+G141) = if activia_option_15 36 else 0
-            $I141 = i141($request->activia_option_15, $request->surface_of_property);
+            //I141 (G120+G121+G122+G124+G125+G126+G127+G128+G130+G131+G132+G133+G134+G136+G137+G138+G139+G140+G141) = if activia_option_14 36 else 0
+            $I141 = i141($request->activia_option_12, $request->surface_of_property);
 
             
             //I116 = 0
@@ -89,6 +89,7 @@ class ActiviaController extends Controller
 
         
         $total = (($D156 - 4.7 - $I152) * $F157 * $F158 * $F159 + $I152) + 21.6 + 4.7;
+        $total = number_format($total, 2);
 
         $options = [
             'activia_option_1' => $request->activia_option_1,
@@ -102,10 +103,9 @@ class ActiviaController extends Controller
             'activia_option_9' => $request->activia_option_9,
             'activia_option_10' => $request->activia_option_10,
             'activia_option_11' => $request->activia_option_11,
+            // 'activia_option_12' => $request->activia_option_12,
+            // 'activia_option_13' => $request->activia_option_13,
             'activia_option_12' => $request->activia_option_12,
-            'activia_option_13' => $request->activia_option_13,
-            'activia_option_14' => $request->activia_option_14,
-            'activia_option_15' => $request->activia_option_15,
         ];
 
         $activia_result = [

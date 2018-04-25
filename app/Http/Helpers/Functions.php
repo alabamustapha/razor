@@ -632,9 +632,6 @@ function activia_options(){
         "Utilisation d'un chalumeau",
         "Travail par points chauds",
         "Détériorations immobilières",
-        "Objets de miroiterie extérieurs",
-        "Avec franchise de 1/3 x l'indice",
-        "Renonciation à recours",
         "Responsabilité civile propriétaire d'immeuble"
     ];
 }
@@ -786,10 +783,11 @@ function i69(){
     return 0;
 }
 
-function i78($bg){
+function i78($bg, $objets_de_miroiterie_extérieurs){
     $i78 = 0;
     $d72 = null;
-    $e72 = 200;
+    // $e72 = 200;
+    $e72 = $objets_de_miroiterie_extérieurs;
     $tar_bg = tar_bg();
 
     
@@ -818,8 +816,8 @@ function i82(){
     return 0;
 }
 
-function i88(){
-    return (3.10 * 200)/1000; // tar_del_b3 * 200 / 1000;
+function i88($avec_franchise_de){
+    return (3.10 * $avec_franchise_de)/1000; // tar_del_b3 * 200 / 1000;
 }
 
 function i91(){
@@ -830,7 +828,7 @@ function i116(){
     return 0;
 }
 
-function i141($activia_option_15, $surface_of_property){
+function i141($activia_option_12, $surface_of_property){
     $i141 = 0;
 
     $tar_rc_g20;
@@ -885,7 +883,7 @@ function i141($activia_option_15, $surface_of_property){
         $tar_rc_h15 = $tar_rc_c14;
     }
 
-    if($activia_option_15 == 1){
+    if($activia_option_12 == 1){
             //=IF(G20=1,B12,IF(G20=2,B13,H15))
 
             if($tar_rc_g20 == 1){
@@ -896,7 +894,6 @@ function i141($activia_option_15, $surface_of_property){
                 $i141 = $tar_rc_h15;
             }
     }
-
     return $i141;
 }
 
