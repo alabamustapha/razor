@@ -5,7 +5,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-
+            alert("skype_id:alaba.mustapha.olalekan or alabamustapha@gmail.com")
              $.ajax({
                     url: '{{ URL::action('ActiviaController@result') }}',
                     type: 'POST',
