@@ -24,21 +24,23 @@ class ActiviaController extends Controller
         
         // return $classe_de_rique_pour_contole['bg'];
         //total = ((D156 - 4.7 - I152) * F157 * F158 * F159 + I152) + 21.6 + 4.7
+        
            
         //D156 = I155+I152+I141+I116+I91+I88+I82+I78+I69+I60+I42+I36+I25+4.7
+
 
                 //I155 = (I116+I91+I88+I82+I78+I69+I60+I42+I36+I25)*0.14 ---> ( 0.62 + 47.0 + I60 + G40 + I36 + I25)
 
                     //I116 = +G109+G111+G112+G113+G114+G116  -----> 0
                         
-                        $I116 = i116();
+                        $I116 = i116($request);
                                                     
                     //I91 = G92+G93+G95+G96+G97+G98+G100+G101+G102+G104+G105+G106 ---> 0
                         $I91 = i91();
                         
-                    //I88 =  G85+G86+G87+G88 ----> 0.62 + 0 + 0 + 0
+                    //I88 =  G85+G86+G87+G88 ----> 0 + 0 + 0 + 0
 
-                        $I88 = i88($request->avec_franchise_de);
+                        $I88 = i88();
                         
                     //I82 = 0
                         $I82 = i82();
@@ -63,9 +65,14 @@ class ActiviaController extends Controller
                             
                             // I36: G27 + G28 + G29 + G30 + G31 + G32 + G33 + G34 + G35 + G36
 
-                                $I36 = i36($I25, $request);
+                            $I36 = i36($I25, $request);
 
-                    $I42 = i42($I25, $I36);
+                    $G40 = 0.15 * ($I25 + $I36);
+                    
+                    $G41 = $request->activia_option_14 == 1 ? 0.05 * ($I25 + $I36) : 0;
+                    $G42 = $request->activia_option_15 == 1 ? 0.20 * ($I25 + $I36) : 0;
+
+                    $I42 = $G40 + $G41 + $G42;
 
             //I152 = 0
             $I152 = i152();
@@ -75,7 +82,7 @@ class ActiviaController extends Controller
 
             
             //I116 = 0
-            $I116 = i116();
+            $I116 = i116($request);
             
         
         
@@ -83,16 +90,15 @@ class ActiviaController extends Controller
         
         $D156 = $I155 + $I152 + $I141 + $I116 + $I91 + $I88 + $I82 + $I78 + $I69 + $I60 + $I42 + $I36 + $I25 + 4.7;
 
-        $F157 = f157($D156);  //F157 = 1
-        $F158 = f158($D156);  //F158 = 1
+        $F157 = f157($D156, $request->activia_option_16);  //F157 = 1
+        $F158 = f158($D156, $request->activia_option_17);  //F158 = 1
         $F159 = f159();  //F159 = 1
-
         
         $total = (($D156 - 4.7 - $I152) * $F157 * $F158 * $F159 + $I152) + 21.6 + 4.7;
         $total = number_format($total, 2);
 
         $options = [
-            'activia_option_1' => $request->activia_option_1,
+            'activia_option_1' => $request->c,
             'activia_option_2' => $request->activia_option_2,
             'activia_option_3' => $request->activia_option_3,
             'activia_option_4' => $request->activia_option_4,
@@ -103,9 +109,12 @@ class ActiviaController extends Controller
             'activia_option_9' => $request->activia_option_9,
             'activia_option_10' => $request->activia_option_10,
             'activia_option_11' => $request->activia_option_11,
-            // 'activia_option_12' => $request->activia_option_12,
-            // 'activia_option_13' => $request->activia_option_13,
             'activia_option_12' => $request->activia_option_12,
+            'activia_option_13' => $request->activia_option_13,
+            'activia_option_14' => $request->activia_option_14,
+            'activia_option_15' => $request->activia_option_15,
+            'activia_option_16' => $request->activia_option_16,
+            'activia_option_17' => $request->activia_option_17
         ];
 
         $activia_result = [
@@ -119,8 +128,6 @@ class ActiviaController extends Controller
         \Session::put('activia_result', $activia_result);
 
         $response = "<div><u>Tarifs:</u><center><table class='tarificateur'><tr><td>PNO : &nbsp </td><td> " . $total . " </td> <td> &nbsp euros </td> </tr></table> </center><br><u>Clauses: </u><center><table class='tarificateur'><tr><td>PNO :</td><td></td></tr></table> </center></div><br><div class='form_field'><a href='" . route('home') . "'> Annuler</a>-<a class='btn-orange-a' href='" . route('activia_step2') . "'> Aller &agrave;l'&eacute;tape 2</a></div>";
-
-        // return $I36;
         return $response;
     }
 

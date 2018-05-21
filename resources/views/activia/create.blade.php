@@ -5,7 +5,6 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            alert("skype_id:alaba.mustapha.olalekan or alabamustapha@gmail.com")
              $.ajax({
                     url: '{{ URL::action('ActiviaController@result') }}',
                     type: 'POST',
@@ -83,12 +82,12 @@
                                             <input name="objets_de_miroiterie_extérieurs" class="form-control" type="number" value="200"> 
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label for="avec_franchise_de" class="col-md-4 control-label">Avec franchise de 1/3 x l'indice </label>
                                         <div class="col-md-8">
                                             <input name="avec_franchise_de" class="form-control" type="number" value="200"> 
                                         </div>
-                                    </div>
+                                    </div> -->
                                    
 
                                    

@@ -632,7 +632,12 @@ function activia_options(){
         "Utilisation d'un chalumeau",
         "Travail par points chauds",
         "Détériorations immobilières",
-        "Responsabilité civile propriétaire d'immeuble"
+        "Responsabilité civile propriétaire d'immeuble",
+        "H1 - Bâtiment (réponse O/N)",
+        "Sans franchise",
+        "B2 - Pack tempête (réponse O/N)",
+        "Application d'une franchise supplémentaire de 2/7 d'indice",
+        "Pluralité de garanties (>6 garanties)"
     ];
 }
 
@@ -644,7 +649,7 @@ function calcul_smp(){
 function f157($d156, $e157 = false){
     
     $f157 = 1;
-    if($e157){
+    if($e157 == 1){
         $f157 = appli_rabais($d156)['j1'];
     }
 
@@ -653,8 +658,9 @@ function f157($d156, $e157 = false){
 }
 
 function f158($d156, $e158 = false){
+     
     $f158 = 1;
-
+    
     if($e158 && calcul_smp() >= 6){
         $f158 = appli_rabais($d156)['f5'];
     }
@@ -816,16 +822,44 @@ function i82(){
     return 0;
 }
 
-function i88($avec_franchise_de){
-    return (3.10 * $avec_franchise_de)/1000; // tar_del_b3 * 200 / 1000;
+function i88(){
+    return 0;
+    // return (3.10 * $avec_franchise_de)/1000; // tar_del_b3 * 200 / 1000;
 }
 
 function i91(){
     return 0;
 }
 
-function i116(){
-    return 0;
+function i116($request){
+
+    // return $request->all();
+
+    //G109+G111+G112+G113+G114+G116
+
+    //G109
+    
+    //=INDEX(TarDDE!B1:B3,L6)
+    $l6 = classe_de_rique_pour_contole($request->profession)['dde'];
+
+    $tar_dde_b1_b3 = [
+        1 => 0.15,
+        2 => 0.2,
+        3 => 0.37
+    ];
+
+    $D109 = $tar_dde_b1_b3[$l6];
+
+    $tar_dde_d12 = $D109 * $request->surface_of_property;
+    
+    $tar_dde_b7 = 41;
+    
+    $tar_dde_d13 = $tar_dde_d12 > $tar_dde_b7 ? $tar_dde_d12 : $tar_dde_b7;
+    
+    
+    $G109 = $request->activia_option_13 == 1 ? $tar_dde_d13 : 0;
+    
+    return $G109;
 }
 
 function i141($activia_option_12, $surface_of_property){
