@@ -66,13 +66,14 @@ class ActiviaController extends Controller
                             // I36: G27 + G28 + G29 + G30 + G31 + G32 + G33 + G34 + G35 + G36
 
                             $I36 = i36($I25, $request);
-
+                    
                     $G40 = 0.15 * ($I25 + $I36);
                     
                     $G41 = $request->activia_option_14 == 1 ? 0.05 * ($I25 + $I36) : 0;
                     $G42 = $request->activia_option_15 == 1 ? 0.20 * ($I25 + $I36) : 0;
 
                     $I42 = $G40 + $G41 + $G42;
+
 
             //I152 = 0
             $I152 = i152();
@@ -98,7 +99,7 @@ class ActiviaController extends Controller
         $total = number_format($total, 2);
 
         $options = [
-            'activia_option_1' => $request->c,
+            'activia_option_1' => $request->activia_option_1,
             'activia_option_2' => $request->activia_option_2,
             'activia_option_3' => $request->activia_option_3,
             'activia_option_4' => $request->activia_option_4,
@@ -114,7 +115,8 @@ class ActiviaController extends Controller
             'activia_option_14' => $request->activia_option_14,
             'activia_option_15' => $request->activia_option_15,
             'activia_option_16' => $request->activia_option_16,
-            'activia_option_17' => $request->activia_option_17
+            'activia_option_17' => $request->activia_option_17,
+            'activia_option_17' => $request->activia_option_18
         ];
 
         $activia_result = [

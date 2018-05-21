@@ -637,7 +637,8 @@ function activia_options(){
         "Sans franchise",
         "B2 - Pack tempête (réponse O/N)",
         "Application d'une franchise supplémentaire de 2/7 d'indice",
-        "Pluralité de garanties (>6 garanties)"
+        "Pluralité de garanties (>6 garanties)",
+        "Batiment catégorie 1"
     ];
 }
 
@@ -739,7 +740,7 @@ function i36($i25, $request){
     //G33: if activia_option_8 I25 * 0.25 else 0
     $G33 = $request->activia_option_8 == 1 ? 0.25 * $i25 : 0;       
                                 //G34: 0.4 * I25
-    $G34 = 0.4 * $i25;           
+    $G34 = $request->activia_option_18 == 1 ? 0.4 * $i25 : 0;           
                                 //G35: if activia_option_9 I25 * 0.5 else 0
     $G35 = $request->activia_option_9 == 1 ? 0.5 * $i25 : 0;       
                                 //G36: if activia_option_10 I25 * 0.3 else 0
