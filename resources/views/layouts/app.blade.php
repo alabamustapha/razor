@@ -33,7 +33,13 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/home') }}" style="display:inline-table !important;">
-                    <img style="height: 80px;" src="{{ asset('../images/LogoResidassur.jpg')}}" alt="Groupe corim assurance" class="img-responsive">
+                    @if(str_contains(url()->current(), 'activia'))
+                        <img style="height: 80px;" src="{{ asset('../images/activia.png')}}" alt="Groupe corim assurance" class="img-responsive">
+                    @else
+                        <img style="height: 80px;" src="{{ asset('../images/LogoResidassur.jpg')}}" alt="Groupe corim assurance" class="img-responsive">
+                    @endif
+                    
+                    
                 </a>
             </div>
 

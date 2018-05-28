@@ -104,10 +104,11 @@
                                         <div class="col-md-10">
 
                                             @foreach($options as $index => $option)
-                                            @if($loop->iteration == 1 || $loop->iteration == 16 || $loop->iteration == 17)
-                                                <input type="hidden" name="activia_option_{{$index+1}}" value="1">
+                                            @if($option['show'] == 0)
+                                                <input type="radio" name="activia_option_{{$index+1}}" value="1" {{ $option['value'] == 1 ? 'checked' : ''}}> Oui <input type="radio" name="activia_option_{{$index+1}}" value="-1" {{ $option['value'] != 1 ? 'checked' : ''}}> Non <del>{{ $option['name'] }}</del> <br>
+                                                <!-- <input type="hidden" name="activia_option_{{$index+1}}" value="{{ $option['value'] == 1 ? '1' : '-1'}}"> -->
                                             @else
-                                            <input type="radio" name="activia_option_{{$index+1}}" value="1" checked> Oui <input type="radio" name="activia_option_{{$index+1}}" value="-1"> Non {{ $option}} <br>
+                                                <input type="radio" name="activia_option_{{$index+1}}" value="1" {{ $option['value'] == 1 ? 'checked' : ''}}> Oui <input type="radio" name="activia_option_{{$index+1}}" value="-1" {{ $option['value'] != 1 ? 'checked' : ''}}> Non {{ $option['name'] }} <br>
                                             @endif
                                             @endforeach    
                                                 

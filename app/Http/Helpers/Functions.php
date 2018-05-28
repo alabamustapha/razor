@@ -621,24 +621,24 @@ function appli_rabais($d156){
 function activia_options(){
     return 
     [
-        "Propriétaire ou copropriétaire",
-        "Construction matériaux durs < 90 %",
-        "Construction matériaux durs < 30 %",
-        "Couverture matériaux durs < 90 %",
-        "Couverture matériaux durs < 30 %",
-        "Présence de 200 à 3000 l d'essence",
-        "Présence de 8 à 30 bouteilles de butane (13 kg)",
-        "Renonciation à recours",
-        "Utilisation d'un chalumeau",
-        "Travail par points chauds",
-        "Détériorations immobilières",
-        "Responsabilité civile propriétaire d'immeuble",
-        "H1 - Bâtiment (réponse O/N)",
-        "Sans franchise",
-        "B2 - Pack tempête (réponse O/N)",
-        "Application d'une franchise supplémentaire de 2/7 d'indice",
-        "Pluralité de garanties (>6 garanties)",
-        "Batiment catégorie 1"
+        ['name' => "Propriétaire ou copropriétaire", 'value' => 1, 'show' => 0],
+        ['name' => "Construction matériaux durs < 90 %", 'value' => 0, 'show' => 1],
+        ['name' => "Construction matériaux durs < 30 %", 'value' => 0, 'show' => 1],
+        ['name' => "Couverture matériaux durs < 90 %", 'value' => 0, 'show' => 1],
+        ['name' => "Couverture matériaux durs < 30 %", 'value' => 0, 'show' => 1],
+        ['name' => "Présence de 200 à 3000 l d'essence", 'value' => 0, 'show' => 1],
+        ['name' => "Présence de 8 à 30 bouteilles de butane (13 kg)", 'value' => 0, 'show' => 1],
+        ['name' => "Renonciation à recours", 'value' => 0, 'show' => 1],
+        ['name' => "Utilisation d'un chalumeau", 'value' => 0, 'show' => 1],
+        ['name' => "Travail par points chauds", 'value' => 0, 'show' => 1],
+        ['name' => "Détériorations immobilières", 'value' => 1, 'show' => 0],
+        ['name' => "Responsabilité civile propriétaire d'immeuble", 'value' => 1, 'show' => 0],
+        ['name' => "H1 - Bâtiment (réponse O/N)", 'value' => 1, 'show' => 0],
+        ['name' => "Sans franchise", 'value' => 0, 'show' => 1],
+        ['name' => "B2 - Pack tempête (réponse O/N)", 'value' => 0, 'show' => 0],
+        ['name' => "Application d'une franchise supplémentaire de 2/7 d'indice", 'value' => 0, 'show' => 0],
+        ['name' => "Pluralité de garanties (>6 garanties)", 'value' => 0, 'show' => 0],
+        ['name' => "Batiment catégorie 1", 'value' => 0, 'show' => 1]
     ];
 }
 
