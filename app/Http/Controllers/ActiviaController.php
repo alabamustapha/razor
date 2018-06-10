@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use function Composer\Autoload\includeFile;
+use Session;
+use Auth;
+use DB;
 
 class ActiviaController extends Controller
 {
@@ -151,14 +155,14 @@ class ActiviaController extends Controller
     }
 
     public function step4(){
-        $costumer_sigle = \Session::get('costumer.in_customer_sigle');
-        $costumer_nom = \Session::get('costumer.in_customer_nom');
-        $result_rc = \Session::get('result.rc');
+        $costumer_sigle = \Session::get('activia_costumer.in_customer_sigle');
+        $costumer_nom = \Session::get('activia_costumer.in_customer_nom');
+        $result_rc = \Session::get('activia_result.rc');
         //$all_clauses = Session::get('result.clauses');
         //$test = Session::all();
-        $product_n = session('result');
-        $proposant_n = session('costumer');
-        dd(\Session::all());
+        $product_n = session('activia_result');
+        $proposant_n = session('activia_costumer');
+        // dd(\Session::all());
         $product = serialize($product_n);
         $proposant = serialize($proposant_n);
         $date = date("Y-m-d");
@@ -167,7 +171,7 @@ class ActiviaController extends Controller
             [
                 'id_contrat' => -1,
                 'affiliate_users' => Auth::user()->id,
-                'type_product' => 4,
+                'type_product' => 5,
                 'data_product' => $product,
                 'data_proposant' => $proposant,
                 'customer_nom' => $costumer_sigle . ' ' . $costumer_nom,
@@ -192,9 +196,6 @@ class ActiviaController extends Controller
                 'customer_amount_rc' => 0.00,
                 'date_contract' => 0,
                 'clauses' => '',
-
-
-
             ],
 
         ]);
@@ -202,6 +203,6 @@ class ActiviaController extends Controller
         $ref_contrat = DB::table('devis')->where('affiliate_users', Auth::user()->id)->pluck('id', 'id')->last();
         //dd($costumer_sigle, $costumer_nom, $product, $proposant,  $result_rc, $ref_contrat);
         $contrat = $ref_contrat;
-        return view('tarificateurgroupama.tarifgroupama_step4', compact('contrat'));
+        return view('activia.step4', compact('contrat'));
     }
 }

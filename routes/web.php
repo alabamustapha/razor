@@ -129,6 +129,7 @@ Route::get('/tarificateurbatiment/ExportClient', 'ExcelController@ExportClients'
 /* FPDF */
 ///// Devis batiment //////
 Route::get('/devis_bat', 'FPDFController@devisbatpdf');
+Route::get('/activia_pdf', 'FPDFController@activiapdf');
 Route::get('/old_devis_bat','FpdfOldDevisController@olddevisbatpdf');
 Route::get('/devis_bat_groupama','PdfGroupamaDevis@devisbatgroupamapdf');
 //// Lettre d'envoi //////
