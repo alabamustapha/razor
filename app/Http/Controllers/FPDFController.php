@@ -445,6 +445,8 @@ class FPDFController extends Controller
         $proposant = unserialize($devis[0]->data_proposant);
         $product = unserialize($devis[0]->data_product);
 
+        // var_dump($product);
+        // dd($proposant);
         // if($product['in_coef_aggravation_occupation'] == 0){
         //     $coef_aggravation_occupation = 'Sans aggravation';
         // }else if($product['in_coef_aggravation_occupation'] == 1){
@@ -504,9 +506,9 @@ class FPDFController extends Controller
         $this->activia_pdf->Table_entete("Le proposant :");
 
         $this->activia_pdf->Cell(35,5,"Sigle ou Nom :",1,0,'L',true);
-        $this->activia_pdf->Cell(60,5,utf8_decode(''.$proposant['in_customer_sigle'].' '.$proposant['in_customer_nom'].''),1,0,'L',true);
+        $this->activia_pdf->Cell(60,5,utf8_decode(''.$proposant['in_customer_sigle'].' '.$proposant['in_customer_nom']. ' ' . $proposant['in_customer_prenom']),1,0,'L',true);
         $this->activia_pdf->Cell(35,5,utf8_decode("Gestionnaire :"),1,0,'L',true);
-        $this->activia_pdf->Cell(60,5,utf8_decode($proposant['in_customer_prenom']),1,0,'L',true);
+        $this->activia_pdf->Cell(60,5,'',1,0,'L',true);
         $this->activia_pdf->Ln();
         $this->activia_pdf->Cell(35,5,"Date de naissance :",1,0,'L',true);
         $this->activia_pdf->Cell(60,5,$proposant['in_customer_datedenaissance'],1,0,'L',true);
@@ -528,12 +530,12 @@ class FPDFController extends Controller
         $this->activia_pdf->Cell(35,5,"Code postal :",1,0,'LT',true);
         $this->activia_pdf->Cell(60,5,utf8_decode($proposant['in_customer_codepostal']),1,0,'L',true);
         $this->activia_pdf->Cell(35,5,utf8_decode("Ville :"),1,0,'L',true);
-        $this->activia_pdf->Cell(60,5,$proposant['in_customer_telephone'],1,0,'L',true);
+        $this->activia_pdf->Cell(60,5,$proposant['in_customer_ville'],1,0,'L',true);
         $this->activia_pdf->Ln();
         $this->activia_pdf->Cell(35,5, "Fax :",1,0,'LT',true);
-        $this->activia_pdf->Cell(60,5,utf8_decode($proposant['in_customer_ville']),1,0,'L',true);
-        $this->activia_pdf->Cell(35,5, "Téléphone :",1,0,'L',true);
         $this->activia_pdf->Cell(60,5,utf8_decode($proposant['in_customer_fax']),1,0,'L',true);
+        $this->activia_pdf->Cell(35,5,utf8_decode("Téléphone :"),1,0,'L',true);
+        $this->activia_pdf->Cell(60,5,utf8_decode($proposant['in_customer_telephone']),1,0,'L',true);
         $this->activia_pdf->Ln();
 
         //---------------------------------------------------------------------------//
