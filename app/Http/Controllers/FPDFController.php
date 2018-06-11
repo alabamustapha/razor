@@ -11,10 +11,12 @@ use DB;
 class FPDFController extends Controller
 {
     protected $pdf;
+    protected $activia_pdf;
 
-    public function __construct(\App\Models\Pdf $pdf)
+    public function __construct(\App\Models\Pdf $pdf, \App\Models\PdfActivia $activia_pdf)
     {
         $this->pdf = $pdf;
+        $this->activia_pdf = $activia_pdf;
     }
 
     public function devisbatpdf(){
@@ -462,38 +464,36 @@ class FPDFController extends Controller
         // }
 
         new FPDF('P', 'mm', 'A4');
-
-        $this->pdf->AliasNbPages();
-        $this->pdf->AddPage();
-        $this->pdf->SetFillColor(255,255,255);
+        $this->activia_pdf->AliasNbPages();
+        $this->activia_pdf->AddPage();
+        $this->activia_pdf->SetFillColor(255,255,255);
         if ($devis[0]->affiliate_lastname!="" && $devis[0]->affiliate_lastname!=null){
-            $this->pdf->Ln(5);
-            $this->pdf->SetFont('Arial','B',9);
-            $this->pdf->Cell(35,5,utf8_decode('DEVIS n°'.$id_devis.' généré le '.date('d-m-Y', strtotime($date_an))),0,0,'L',true);
-            $this->pdf->Ln();
-            $this->pdf->Ln();
-            $this->pdf->SetFont('Arial','',9);
-            $this->pdf->Cell(35,5,' par '.$devis[0]->affiliate_lastname.' '. $devis[0]->affiliate_firstname,0,0,'L',true);
-            $this->pdf->Ln();
-            $this->pdf->Cell(35,5,' pour '.$devis[0]->affiliate_company,0,0,'L',true);
-            $this->pdf->Ln();
-            $this->pdf->Cell(45,5,' '.$devis[0]->affiliate_address,0,0,'L',true);
-            $this->pdf->Ln();
-            $this->pdf->Cell(45,5,' '. utf8_decode($devis[0]->affiliate_city).' '. $devis[0]->affiliate_zip,0,0,'L',true);
-            $this->pdf->Ln();
-            $this->pdf->Cell(45,5,utf8_decode(' n° ORIAS :'. $devis[0]->affiliate_orias),0,0,'L',true);
-            $this->pdf->Ln();
-            if (!empty($devis[0]->affiliate_ref)){
-                $this->pdf->Cell(80,5,utf8_decode('Référence affilié : ').$devis[0]->affiliate_ref,0,0,'L',true);
-            }else{
+            $this->activia_pdf->Ln(5);
+            $this->activia_pdf->SetFont('Arial','B',9);
+            $this->activia_pdf->Cell(35,5,utf8_decode('DEVIS n°'.$id_devis.' généré le '.date('d-m-Y', strtotime($date_an))),0,0,'L',true);
+            $this->activia_pdf->Ln();
+            $this->activia_pdf->SetFont('Arial','',9);
+            $this->activia_pdf->Cell(35,5,' par '.$devis[0]->affiliate_lastname.' '. $devis[0]->affiliate_firstname,0,0,'L',true);
+            $this->activia_pdf->Ln();
+            // $this->pdf->Cell(35,5,' pour '.$devis[0]->affiliate_company,0,0,'L',true);
+            // $this->pdf->Ln();
+            // $this->pdf->Cell(45,5,' '.$devis[0]->affiliate_address,0,0,'L',true);
+            // $this->pdf->Ln();
+            // $this->pdf->Cell(45,5,' '. utf8_decode($devis[0]->affiliate_city).' '. $devis[0]->affiliate_zip,0,0,'L',true);
+            // $this->pdf->Ln();
+            // $this->pdf->Cell(45,5,utf8_decode(' n° ORIAS :'. $devis[0]->affiliate_orias),0,0,'L',true);
+            // $this->pdf->Ln();
+            // if (!empty($devis[0]->affiliate_ref)){
+            //     $this->pdf->Cell(80,5,utf8_decode('Référence affilié : ').$devis[0]->affiliate_ref,0,0,'L',true);
+            // }else{
 
-            }
+            // }
 
 
         }else {
-            $this->pdf->Ln(40);
-            $this->pdf->SetFont('Arial','B',9);
-            $this->pdf->Cell(35,5,utf8_decode('DEVIS n°'.$id_devis.' généré le '.date('d-m-Y', strtotime($date_an))),0,0,'L',true);
+            $this->activia_pdfactivia_pdf->Ln(40);
+            $this->activia_pdfactivia_pdf->SetFont('Arial','B',9);
+            $this->activia_pdfactivia_pdf->Cell(35,5,utf8_decode('DEVIS n°'.$id_devis.' généré le '.date('d-m-Y', strtotime($date_an))),0,0,'L',true);
         }
 
 
@@ -501,60 +501,60 @@ class FPDFController extends Controller
         //----------------------------------LE PROPOSANT-----------------------------//
         //---------------------------------------------------------------------------//
 
-        $this->pdf->Table_entete("Le proposant :");
+        $this->activia_pdf->Table_entete("Le proposant :");
 
-        $this->pdf->Cell(35,5,"Sigle ou Nom :",1,0,'L',true);
-        $this->pdf->Cell(60,5,utf8_decode(''.$proposant['in_customer_sigle'].' '.$proposant['in_customer_nom'].''),1,0,'L',true);
-        $this->pdf->Cell(35,5,utf8_decode("Gestionnaire :"),1,0,'L',true);
-        $this->pdf->Cell(60,5,utf8_decode($proposant['in_customer_prenom']),1,0,'L',true);
-        $this->pdf->Ln();
-        $this->pdf->Cell(35,5,"Date de naissance :",1,0,'L',true);
-        $this->pdf->Cell(60,5,$proposant['in_customer_datedenaissance'],1,0,'L',true);
-        $this->pdf->Cell(35,5,"Courriel :",1,0,'L',true);
-        $this->pdf->Cell(60,5,utf8_decode($proposant['in_customer_courriel']),1,0,'L',true);
-        $this->pdf->Ln();
-        $x=$this->pdf->GetX();
-        $y=$this->pdf->GetY();
-        $this->pdf->Rect($x,$y,35,14);
-        $this->pdf->MultiCell(35,5,"Adresse :\n",0,false);
-        $this->pdf->SetXY($x+35,$y);
-        $this->pdf->GetX();
-        $this->pdf->GetY();
-        $this->pdf->Rect($x,$y,190,14);
-        $this->pdf->MultiCell(155,5,utf8_decode($proposant['in_customer_adresse']),0,false);
-        $this->pdf->SetXY(+155,$y);
-        $this->pdf->Ln();
-        $this->pdf->Ln();
-        $this->pdf->Cell(35,5,"Code postal :",1,0,'LT',true);
-        $this->pdf->Cell(60,5,utf8_decode($proposant['in_customer_codepostal']),1,0,'L',true);
-        $this->pdf->Cell(35,5,utf8_decode("Ville :"),1,0,'L',true);
-        $this->pdf->Cell(60,5,$proposant['in_customer_telephone'],1,0,'L',true);
-        $this->pdf->Ln();
-        $this->pdf->Cell(35,5, "Fax :",1,0,'LT',true);
-        $this->pdf->Cell(60,5,utf8_decode($proposant['in_customer_ville']),1,0,'L',true);
-        $this->pdf->Cell(35,5, "Téléphone :",1,0,'L',true);
-        $this->pdf->Cell(60,5,utf8_decode($proposant['in_customer_fax']),1,0,'L',true);
-        $this->pdf->Ln();
+        $this->activia_pdf->Cell(35,5,"Sigle ou Nom :",1,0,'L',true);
+        $this->activia_pdf->Cell(60,5,utf8_decode(''.$proposant['in_customer_sigle'].' '.$proposant['in_customer_nom'].''),1,0,'L',true);
+        $this->activia_pdf->Cell(35,5,utf8_decode("Gestionnaire :"),1,0,'L',true);
+        $this->activia_pdf->Cell(60,5,utf8_decode($proposant['in_customer_prenom']),1,0,'L',true);
+        $this->activia_pdf->Ln();
+        $this->activia_pdf->Cell(35,5,"Date de naissance :",1,0,'L',true);
+        $this->activia_pdf->Cell(60,5,$proposant['in_customer_datedenaissance'],1,0,'L',true);
+        $this->activia_pdf->Cell(35,5,"Courriel :",1,0,'L',true);
+        $this->activia_pdf->Cell(60,5,utf8_decode($proposant['in_customer_courriel']),1,0,'L',true);
+        $this->activia_pdf->Ln();
+        $x=$this->activia_pdf->GetX();
+        $y=$this->activia_pdf->GetY();
+        $this->activia_pdf->Rect($x,$y,35,14);
+        $this->activia_pdf->MultiCell(35,5,"Adresse :\n",0,false);
+        $this->activia_pdf->SetXY($x+35,$y);
+        $this->activia_pdf->GetX();
+        $this->activia_pdf->GetY();
+        $this->activia_pdf->Rect($x,$y,190,14);
+        $this->activia_pdf->MultiCell(155,5,utf8_decode($proposant['in_customer_adresse']),0,false);
+        $this->activia_pdf->SetXY(+155,$y);
+        $this->activia_pdf->Ln();
+        $this->activia_pdf->Ln();
+        $this->activia_pdf->Cell(35,5,"Code postal :",1,0,'LT',true);
+        $this->activia_pdf->Cell(60,5,utf8_decode($proposant['in_customer_codepostal']),1,0,'L',true);
+        $this->activia_pdf->Cell(35,5,utf8_decode("Ville :"),1,0,'L',true);
+        $this->activia_pdf->Cell(60,5,$proposant['in_customer_telephone'],1,0,'L',true);
+        $this->activia_pdf->Ln();
+        $this->activia_pdf->Cell(35,5, "Fax :",1,0,'LT',true);
+        $this->activia_pdf->Cell(60,5,utf8_decode($proposant['in_customer_ville']),1,0,'L',true);
+        $this->activia_pdf->Cell(35,5, "Téléphone :",1,0,'L',true);
+        $this->activia_pdf->Cell(60,5,utf8_decode($proposant['in_customer_fax']),1,0,'L',true);
+        $this->activia_pdf->Ln();
 
         //---------------------------------------------------------------------------//
             //------------------------CARACTERISTIQUES DU RISQUE-------------------------//
             //---------------------------------------------------------------------------//
 
-        $this->pdf->Table_entete(utf8_decode("Caractéristiques du risque :"));
+        $this->activia_pdf->Table_entete(utf8_decode("Caractéristiques du risque :"));
 
-        $x = $this->pdf->GetX();
-        $y = $this->pdf->GetY();
-        $this->pdf->Rect($x, $y, 35, 14);
-        $this->pdf->MultiCell(35, 5, "Adresse :\n", 0, false);
-        $this->pdf->SetXY($x + 35, $y);
-        $x = $this->pdf->GetX();
-        $y = $this->pdf->GetY();
-        $this->pdf->Rect($x, $y, 155, 14);
-        $this->pdf->MultiCell(155, 5, '', 0, false);
-        $this->pdf->SetXY($x + 155, $y);
-        $this->pdf->Ln();
-        $this->pdf->Ln();
-        $this->pdf->Cell(50, 5, "Code postal :", 1, 0, 'LT', true);
+        $x = $this->activia_pdf->GetX();
+        $y = $this->activia_pdf->GetY();
+        $this->activia_pdf->Rect($x, $y, 35, 14);
+        $this->activia_pdf->MultiCell(35, 5, "Adresse :\n", 0, false);
+        $this->activia_pdf->SetXY($x + 35, $y);
+        $x = $this->activia_pdf->GetX();
+        $y = $this->activia_pdf->GetY();
+        $this->activia_pdf->Rect($x, $y, 155, 14);
+        $this->activia_pdf->MultiCell(155, 5, '', 0, false);
+        $this->activia_pdf->SetXY($x + 155, $y);
+        $this->activia_pdf->Ln();
+        $this->activia_pdf->Ln();
+        $this->activia_pdf->Cell(50, 5, "Code postal :", 1, 0, 'LT', true);
 
         // if ($product['in_coef_zone'] <= 9) {
         //     $coef_zone = '0' . $proposant['in_risk_codepostal'];
@@ -562,61 +562,61 @@ class FPDFController extends Controller
         //     $coef_zone = $proposant['in_risk_codepostal'];
 
         // }
-        $this->pdf->Cell(45, 5, '', 1, 0, 'L', true);
-        $this->pdf->Cell(50, 5, "Ville :", 1, 0, 'LT', true);
-        $this->pdf->Cell(45, 5, '', 1, 0, 'L', true);
-        $this->pdf->Ln();
+        $this->activia_pdf->Cell(45, 5, '', 1, 0, 'L', true);
+        $this->activia_pdf->Cell(50, 5, "Ville :", 1, 0, 'LT', true);
+        $this->activia_pdf->Cell(45, 5, '', 1, 0, 'L', true);
+        $this->activia_pdf->Ln();
 
-        $this->pdf->Cell(25, 5, "Occupant :", 1, 0, 'L', true);
-        $this->pdf->Cell(25, 5, '', 1, 0, 'L', true);
-        $this->pdf->Cell(45, 5, "Agravation occupation :", 1, 0, 'L', true);
-        $this->pdf->Cell(95, 5, '', 1, 0, 'L', true);
-        $this->pdf->Ln();
+        $this->activia_pdf->Cell(25, 5, "Occupant :", 1, 0, 'L', true);
+        $this->activia_pdf->Cell(25, 5, '', 1, 0, 'L', true);
+        $this->activia_pdf->Cell(45, 5, "Agravation occupation :", 1, 0, 'L', true);
+        $this->activia_pdf->Cell(95, 5, '', 1, 0, 'L', true);
+        $this->activia_pdf->Ln();
 
-        $this->pdf->Cell(50, 5, utf8_decode("Surface développée (en m²) :"), 1, 0, 'LT', true);
-        $this->pdf->Cell(45, 5, '', 1, 0, 'L', true);
-        $this->pdf->Cell(50, 5, utf8_decode("Année de construction :"), 1, 0, 'L', true);
-        $this->pdf->Cell(45, 5, '', 1, 0, 'L', true);
-        $this->pdf->Ln();
-        $this->pdf->Cell(50, 5, utf8_decode("Catégorie de construction :"), 1, 0, 'LT', true);
-        $this->pdf->Cell(45, 5, utf8_decode("Catégorie 2"), 1, 0, 'L', true);
+        $this->activia_pdf->Cell(50, 5, utf8_decode("Surface développée (en m²) :"), 1, 0, 'LT', true);
+        $this->activia_pdf->Cell(45, 5, '', 1, 0, 'L', true);
+        $this->activia_pdf->Cell(50, 5, utf8_decode("Année de construction :"), 1, 0, 'L', true);
+        $this->activia_pdf->Cell(45, 5, '', 1, 0, 'L', true);
+        $this->activia_pdf->Ln();
+        $this->activia_pdf->Cell(50, 5, utf8_decode("Catégorie de construction :"), 1, 0, 'LT', true);
+        $this->activia_pdf->Cell(45, 5, utf8_decode("Catégorie 2"), 1, 0, 'L', true);
         //$pdf->Cell(45,5,$coef_categorie_batiment['designation'][$product['in_coef_categorie_batiment']],1,0,'L',true);
-        $this->pdf->Cell(50, 5, "Nature du risque :", 1, 0, 'L', true);
-        $this->pdf->Cell(45, 5, '', 1, 0, 'L', true);
-        $this->pdf->Ln();
-        $this->pdf->Cell(50, 5, utf8_decode("Sinistres déclarés / 36 mois :"), 1, 0, 'LT', true);
-        $this->pdf->Cell(15, 5, '', 1, 0, 'L', true);
-        $this->pdf->Cell(15, 5, utf8_decode("Coût :"), 1, 0, 'LT', true);
-        $this->pdf->Cell(15, 5, '', 1, 0, 'L', true);
-        $this->pdf->Cell(50, 5, utf8_decode("Activité :"), 1, 0, 'L', true);
-        $this->pdf->Cell(45, 5, utf8_decode(''), 1, 0, 'L', true);
-        $this->pdf->Ln();
+        $this->activia_pdf->Cell(50, 5, "Nature du risque :", 1, 0, 'L', true);
+        $this->activia_pdf->Cell(45, 5, '', 1, 0, 'L', true);
+        $this->activia_pdf->Ln();
+        $this->activia_pdf->Cell(50, 5, utf8_decode("Sinistres déclarés / 36 mois :"), 1, 0, 'LT', true);
+        $this->activia_pdf->Cell(15, 5, '', 1, 0, 'L', true);
+        $this->activia_pdf->Cell(15, 5, utf8_decode("Coût :"), 1, 0, 'LT', true);
+        $this->activia_pdf->Cell(15, 5, '', 1, 0, 'L', true);
+        $this->activia_pdf->Cell(50, 5, utf8_decode("Activité :"), 1, 0, 'L', true);
+        $this->activia_pdf->Cell(45, 5, utf8_decode(''), 1, 0, 'L', true);
+        $this->activia_pdf->Ln();
 
 
         //---------------------------------------------------------------------------//
             //-------------------------SPECIFICITES TECHNIQUES---------------------------//
             //---------------------------------------------------------------------------//
 
-        $this->pdf->Table_entete(utf8_decode("Spécificités techniques du bâtiment assuré :"));
-        $this->pdf->Cell(65, 5, "Construction < 50 % mat durs :", 1, 0, 'LT', true);
-        $this->pdf->Cell(30, 5, 'Non', 1, 0, 'L', true);
-        $this->pdf->Cell(65, 5, "Vitres de plus de 3 m2 :", 1, 0, 'LT', true);
-        $this->pdf->Cell(30, 5, 'Non', 1, 0, 'L', true);
-        $this->pdf->Ln();
-        $this->pdf->Cell(65, 5, "Couverture < 90 % mat durs :", 1, 0, 'LT', true);
-        $this->pdf->Cell(30, 5, 'Non', 1, 0, 'L', true);
-        $this->pdf->Cell(65, 5, utf8_decode("Ren à recours contre état :"), 1, 0, 'L', true);
-        $this->pdf->Cell(30, 5, 'Non', 1, 0, 'L', true);
-        $this->pdf->Ln();
+        $this->activia_pdf->Table_entete(utf8_decode("Spécificités techniques du bâtiment assuré :"));
+        $this->activia_pdf->Cell(65, 5, "Construction < 50 % mat durs :", 1, 0, 'LT', true);
+        $this->activia_pdf->Cell(30, 5, 'Non', 1, 0, 'L', true);
+        $this->activia_pdf->Cell(65, 5, "Vitres de plus de 3 m2 :", 1, 0, 'LT', true);
+        $this->activia_pdf->Cell(30, 5, 'Non', 1, 0, 'L', true);
+        $this->activia_pdf->Ln();
+        $this->activia_pdf->Cell(65, 5, "Couverture < 90 % mat durs :", 1, 0, 'LT', true);
+        $this->activia_pdf->Cell(30, 5, 'Non', 1, 0, 'L', true);
+        $this->activia_pdf->Cell(65, 5, utf8_decode("Ren à recours contre état :"), 1, 0, 'L', true);
+        $this->activia_pdf->Cell(30, 5, 'Non', 1, 0, 'L', true);
+        $this->activia_pdf->Ln();
         
         //---------------------------------------------------------------------------//
         //-----------------------------OPTIONS CHOISIES------------------------------//
         //---------------------------------------------------------------------------//
-        $this->pdf->Table_entete("Les options que vous avez choisies :");
+        $this->activia_pdf->Table_entete("Les options que vous avez choisies :");
 
-        $this->pdf->Cell(75, 5, "Nombre de baux :", 1, 0, 'LT', true);
+        $this->activia_pdf->Cell(75, 5, "Nombre de baux :", 1, 0, 'LT', true);
         
-        $this->pdf->Cell(20, 5, "Non", 1, 0, 'L', true);
+        $this->activia_pdf->Cell(20, 5, "Non", 1, 0, 'L', true);
         // $this->pdf->Cell(75, 5, utf8_decode("Protection juridique étendue :"), 1, 0, 'L', true);
         // if ($product['in_nombre_baux'] > 0) {
         //     $protection_juridique = "Oui";
@@ -636,73 +636,54 @@ class FPDFController extends Controller
         // $this->pdf->Cell(75, 5, utf8_decode("Franchise supplémentaire :"), 1, 0, 'L', true);
         // $this->pdf->Cell(20, 5, "Non", 1, 0, 'L', true);
 
-        $this->pdf->Ln();
+        $this->activia_pdf->Ln();
 
 
         //----------------------------------------------------------------------------------//
         //-----------------------------Réclamation et Litiges------------------------------//
         //--------------------------------------------------------------------------------//
 
-        $this->pdf->Table_entete(utf8_decode("Réclamation et Litiges :"));
-        $x = $this->pdf->GetX();
-        $y = $this->pdf->GetY();
-        $this->pdf->Rect($x, $y, 190, 45);
-        $this->pdf->SetFont('Arial', '', 10);
-        //if (!empty($res->affiliate_adress)){
-        $this->pdf->SetFont('Arial', 'B', 10);
-        $this->pdf->Cell(24, 5, utf8_decode("Réclamation:"), 0, 'L', true);
-        $this->pdf->Ln();
-        $this->pdf->SetFont('Arial', '', 10);
-        $this->pdf->Cell(158, 5, utf8_decode("Toute réclamation doit être adressée en premier lieu par courrier ou par e-mail à l'adresse suivante :"), 0, 'L', true);
-        $this->pdf->Ln();
-        $this->pdf->SetFont('Arial', 'B', 10);
-        $this->pdf->Cell(170, 5, utf8_decode("Groupe corim assurance - Service réclamations - 37, rue des Mathurins - 75008 Paris "), 0, 'C', true);
-        $this->pdf->Ln();
-        $this->pdf->SetFont('Arial', 'B', 10);
-        $this->pdf->Cell(125, 5, utf8_decode("Email: reclamations@groupecorim.fr"), 0, 'C', true);
-        $this->pdf->Ln();
-        $this->pdf->SetFont('Arial', 'B', 10);
-        $this->pdf->Cell(15, 5, "Litiges:", 0, 'L', true);
-        $this->pdf->Ln();
-        $this->pdf->SetFont('Arial', '', 10);
-        $this->pdf->MultiCell(190, 5, utf8_decode("Personne ou société à qui devront être signifiés les actes judiciaires en cas de procédure contentieuse engagée à l'encontre des Assureurs:"), 0, false);
-        $this->pdf->Cell(190, 5, "GROUPE CORIM ASSURANCES - 37, rue des mathurins - 75008 PARIS - www.groupecorim.fr", 0, 'C', true);
-        $this->pdf->Ln();
+        $this->activia_pdf->AddPage();
+
+        // set the source file
+        $this->activia_pdf->Image(storage_path() . '../../public/images/activia_p2.jpg', 6, 30, 200);
+        // import page 1
+
 
 
         //---------------------------------------------------------------------------//
         //-----------------------------------CLAUSES---------------------------------//
         //---------------------------------------------------------------------------//
 
-        $this->pdf->AddPage();
+        $this->activia_pdf->AddPage();
 
         // set the source file
-        $this->pdf->Image(storage_path() . '../../public/images/trdgnew.png', 6, 30, 200);
+        $this->activia_pdf->Image(storage_path() . '../../public/images/activia_p3.jpg', 6, 30, 200);
         // import page 1
 
         // use the imported page and place it at point 10,10 with a width of 100 mm
 
-        $this->pdf->AddPage();
-        $this->pdf->Table_entete("Les clauses applicables au contrat :");
-        $this->pdf->SetFont('Arial', '', 7);
-        $this->pdf->Cell(30, 5, "PNO :", 1, 0, 'LT', true);
-        $this->pdf->Cell(160, 5, '', 1, 0, 'L', true);
+        // $this->activia_pdf->AddPage();
+        // $this->activia_pdf->Table_entete("Les clauses applicables au contrat :");
+        // $this->activia_pdf->SetFont('Arial', '', 7);
+        // $this->activia_pdf->Cell(30, 5, "PNO :", 1, 0, 'LT', true);
+        // $this->activia_pdf->Cell(160, 5, '', 1, 0, 'L', true);
         // $this->pdf->Cell(160, 5, clean_clauses($product['clauses']), 1, 0, 'L', true);
 
         //---------------------------------------------------------------------------//
         //---------------------------------SIGNATURE---------------------------------//
         //---------------------------------------------------------------------------//
-        $this->pdf->SetFont('Arial','',9);
-        $this->pdf->Cell(65,5,"Renseignez la date d'effet :    _ _/_ _/_ _ _ _ ",0,0,'L',true);
-        $this->pdf->Cell(150,5,utf8_decode("Fait à                     le              "),0,0,'C',true);
-        $this->pdf->Ln(10);
-        $this->pdf->Cell(160,5,"Pour RESIDASSUR,                                                                             Le proposant,",0,0,'C',true);
-        //$pdf->Cell(190,10,"",0,0,'L',$pdf->Image('../img/fr/signature.png',null,10,10));
-        $this->pdf->Ln(0);
-        //$pdf->Cell(190,20,$pdf->Image('../img/fr/signature.png',$pdf->GetX(),$pdf->GetY(),10),0,0,'C',true);
-        $this->pdf->Cell(190,20,$this->pdf->Image(storage_path() .'../../public/images/signature.png',$this->pdf->GetX()+50,$this->pdf->GetY(),30),0,0,'L');
+        // $this->activia_pdf->SetFont('Arial','',9);
+        // $this->activia_pdf->Cell(65,5,"Renseignez la date d'effet :    _ _/_ _/_ _ _ _ ",0,0,'L',true);
+        // $this->activia_pdf->Cell(150,5,utf8_decode("Fait à                     le              "),0,0,'C',true);
+        // $this->activia_pdf->Ln(10);
+        // $this->activia_pdf->Cell(160,5,"Pour RESIDASSUR,                                                                             Le proposant,",0,0,'C',true);
+        // //$pdf->Cell(190,10,"",0,0,'L',$pdf->Image('../img/fr/signature.png',null,10,10));
+        // $this->activia_pdf->Ln(0);
+        // //$pdf->Cell(190,20,$pdf->Image('../img/fr/signature.png',$pdf->GetX(),$pdf->GetY(),10),0,0,'C',true);
+        // $this->activia_pdf->Cell(190,20,$this->activia_pdf->Image(storage_path() .'../../public/images/signature.png',$this->activia_pdf->GetX()+50,$this->activia_pdf->GetY(),30),0,0,'L');
 
-        $this->pdf->Output();
+        $this->activia_pdf->Output('I', "hjt.pdf");
 
     }
 
