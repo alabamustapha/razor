@@ -445,26 +445,6 @@ class FPDFController extends Controller
         $proposant = unserialize($devis[0]->data_proposant);
         $product = unserialize($devis[0]->data_product);
 
-        // var_dump($product);
-        // dd($proposant);
-        // if($product['in_coef_aggravation_occupation'] == 0){
-        //     $coef_aggravation_occupation = 'Sans aggravation';
-        // }else if($product['in_coef_aggravation_occupation'] == 1){
-        //     $coef_aggravation_occupation = 'Activité commerciale de 0 à 50 % SD totale';
-        // }else if($product['in_coef_aggravation_occupation'] == 2){
-        //     $coef_aggravation_occupation = 'agricole et fourrage < 3 tonnes';
-        // }else if($product['in_coef_aggravation_occupation'] == 3){
-        //     $coef_aggravation_occupation = 'agricole et fourrage > 10 tonnes';
-        // }else if($product['in_coef_aggravation_occupation'] == 4){
-        //     $coef_aggravation_occupation = 'agricole et fourrage > 3 et < 10 tonnes';
-        // }else if($product['in_coef_aggravation_occupation'] == 5){
-        //     $coef_aggravation_occupation = 'agricole sans fourrage';
-        // }else if($product['in_coef_aggravation_occupation'] == 6){
-        //     $coef_aggravation_occupation = 'bouteilles de gaz de 8 à 30 maximum';
-        // }else if($product['in_coef_aggravation_occupation'] == 7){
-        //     $coef_aggravation_occupation = 'liquides inflammables de 3000 à 8000 litres';
-        // }
-
         new FPDF('P', 'mm', 'A4');
         $this->activia_pdf->AliasNbPages();
         $this->activia_pdf->AddPage();
@@ -552,7 +532,7 @@ class FPDFController extends Controller
         $x = $this->activia_pdf->GetX();
         $y = $this->activia_pdf->GetY();
         $this->activia_pdf->Rect($x, $y, 155, 14);
-        $this->activia_pdf->MultiCell(155, 5, '', 0, false);
+        $this->activia_pdf->MultiCell(155, 5, utf8_decode($proposant['in_risk_adresse']), 0, false);
         $this->activia_pdf->SetXY($x + 155, $y);
         $this->activia_pdf->Ln();
         $this->activia_pdf->Ln();
@@ -562,17 +542,16 @@ class FPDFController extends Controller
         //     $coef_zone = '0' . $proposant['in_risk_codepostal'];
         // } else {
         //     $coef_zone = $proposant['in_risk_codepostal'];
-
         // }
-        $this->activia_pdf->Cell(45, 5, '', 1, 0, 'L', true);
+        $this->activia_pdf->Cell(45, 5, $proposant['in_risk_codepostal'], 1, 0, 'L', true);
         $this->activia_pdf->Cell(50, 5, "Ville :", 1, 0, 'LT', true);
-        $this->activia_pdf->Cell(45, 5, '', 1, 0, 'L', true);
+        $this->activia_pdf->Cell(45, 5, $proposant['in_risk_ville'], 1, 0, 'L', true);
         $this->activia_pdf->Ln();
 
         $this->activia_pdf->Cell(25, 5, "Occupant :", 1, 0, 'L', true);
-        $this->activia_pdf->Cell(25, 5, '', 1, 0, 'L', true);
+        $this->activia_pdf->Cell(25, 5, $proposant['in_risk_ville'] == 1 ? 'Oui' : 'Non', 1, 0, 'L', true);
         $this->activia_pdf->Cell(45, 5, "Agravation occupation :", 1, 0, 'L', true);
-        $this->activia_pdf->Cell(95, 5, '', 1, 0, 'L', true);
+        $this->activia_pdf->Cell(95, 5, utf8_decode('Activité commerciale 100 % SD totale'), 1, 0, 'L', true);
         $this->activia_pdf->Ln();
 
         $this->activia_pdf->Cell(50, 5, utf8_decode("Surface développée (en m²) :"), 1, 0, 'LT', true);
@@ -616,27 +595,19 @@ class FPDFController extends Controller
         //---------------------------------------------------------------------------//
         $this->activia_pdf->Table_entete("Les options que vous avez choisies :");
 
-        $this->activia_pdf->Cell(75, 5, "Nombre de baux :", 1, 0, 'LT', true);
         
-        $this->activia_pdf->Cell(20, 5, "Non", 1, 0, 'L', true);
-        // $this->pdf->Cell(75, 5, utf8_decode("Protection juridique étendue :"), 1, 0, 'L', true);
-        // if ($product['in_nombre_baux'] > 0) {
-        //     $protection_juridique = "Oui";
-        // } else {
-        //     $protection_juridique = "Non";
-        // }
-        // $this->pdf->Cell(20, 5, $protection_juridique, 1, 0, 'L', true);
-        // $this->pdf->Ln();
-        // $this->pdf->Cell(75, 5, "Suppression garantie VOL :", 1, 0, 'LT', true);
-        // $this->pdf->Cell(20, 5, format_etat($product['in_coef_minorations_possibles_0']), 1, 0, 'L', true);
-        // $this->pdf->Cell(75, 5, utf8_decode("Suppression de la garantie dégats des eaux :"), 1, 0, 'L', true);
-        // $this->pdf->Cell(20, 5, format_etat($product['in_coef_minorations_possibles_1']), 1, 0, 'L', true);
-
-        // $this->pdf->Ln();
-        // $this->pdf->Cell(75, 5, "Suppression de la garantie bris de glace :", 1, 0, 'L', true);
-        // $this->pdf->Cell(20, 5, format_etat($product['in_coef_minorations_possibles_2']), 1, 0, 'L', true);
-        // $this->pdf->Cell(75, 5, utf8_decode("Franchise supplémentaire :"), 1, 0, 'L', true);
-        // $this->pdf->Cell(20, 5, "Non", 1, 0, 'L', true);
+        $activia_options = activia_options();
+      
+        for ($i=0; $i < count($activia_options); $i++) {
+            $this->activia_pdf->Cell(65, 5, utf8_decode($activia_options[$i]['name']), 1, 0, 'L', true);
+            $next_index =  str_finish("activia_option_", $i+1);
+            $this->activia_pdf->Cell(30, 5, $product['options'][$next_index] == 1 ? 'Oui' : 'Non', 1, 0, 'L', true);
+            if(($i+1) % 2 == 0){
+                $this->activia_pdf->Ln();
+            }    
+        }
+        
+        
 
         $this->activia_pdf->Ln();
 

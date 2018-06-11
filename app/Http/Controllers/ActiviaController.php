@@ -162,7 +162,6 @@ class ActiviaController extends Controller
         //$test = Session::all();
         $product_n = session('activia_result');
         $proposant_n = session('activia_costumer');
-        // dd(\Session::all());
         $product = serialize($product_n);
         $proposant = serialize($proposant_n);
         $date = date("Y-m-d");
