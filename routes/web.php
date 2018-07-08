@@ -42,6 +42,10 @@ Route::get('/tarificateurbatiment/report', [
     'middleware' => 'isadmin',
     'uses' => 'ReportController@show'])->name('show_report');
 
+    Route::get('/activia/report', [
+    'middleware' => 'isadmin',
+    'uses' => 'ReportController@showActivia'])->name('show_activia_report');
+
 Route::get('/tarificateurbatiment/editioncontrat/{id}', [
     'middleware' => 'isadmin',
     'uses' => 'TarificateurBatimentController@edition_contrat'])->name('editioncontrat');

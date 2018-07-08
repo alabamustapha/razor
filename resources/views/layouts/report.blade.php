@@ -103,7 +103,10 @@
                         <a href="{{ url('tarificateurbatiment/index') }}" class="btn btn-default">Gèrer devis et contrats</a>
                     </div>
                     <div class="btn-group" role="group">
-                        <a href="#" class="btn btn-default">Extraction des contrats</a>
+                        <a href="{{ route('show_activia_report') }}" class="btn btn-default">Extraction des activia contrats</a>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <a href="{{ route('show_report') }}" class="btn btn-default">Extraction des contrats</a>
                     </div>
                 </div>
 
