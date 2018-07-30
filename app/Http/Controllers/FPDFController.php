@@ -10,7 +10,9 @@ use DB;
 
 class FPDFController extends Controller
 {
+   
     protected $pdf;
+   
     protected $activia_pdf;
 
     public function __construct(\App\Models\Pdf $pdf, \App\Models\PdfActivia $activia_pdf)
@@ -597,14 +599,22 @@ class FPDFController extends Controller
 
         
         $activia_options = activia_options();
-      
+            // dd($activia_options);
+            
         for ($i=0; $i < count($activia_options); $i++) {
             $this->activia_pdf->Cell(65, 5, utf8_decode($activia_options[$i]['name']), 1, 0, 'L', true);
             $next_index =  str_finish("activia_option_", $i+1);
-            $this->activia_pdf->Cell(30, 5, $product['options'][$next_index] == 1 ? 'Oui' : 'Non', 1, 0, 'L', true);
-            if(($i+1) % 2 == 0){
-                $this->activia_pdf->Ln();
-            }    
+                try{
+                    $this->activia_pdf->Cell(30, 5, $product['options'][$next_index] == 1 ? 'Oui' : 'Non', 1, 0, 'L', true);
+                    if(($i+1) % 2 == 0){
+                        $this->activia_pdf->Ln();
+                    }   
+                }catch(\Exception $e){
+
+                }
+                
+            
+             
         }
         
         

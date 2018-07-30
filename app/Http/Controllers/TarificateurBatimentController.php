@@ -38,6 +38,7 @@ class TarificateurBatimentController extends Controller
 
         $tarif_bat = TarificateurBatiment::findorfail($id);
 
+        // dd($tarif_bat);
 
         return view('tarificateurbatiment.details', compact('tarif_bat'));
 

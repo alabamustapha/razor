@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TarificateurBatiment extends Model
 {
     public $table = "devis";
-
+    
     protected $fillable = [
         'id_contrat', 'affiliate_users', 'status', 'type_product', 'data_product', 'data_proposant', 'custumer_nom', 'tarificateur_amount', 'costumer_amount', 'partner_amount', 'affiliate_amount', 'costumer_amount_rc', 'periodicity', 'formule', 'clause', 'affiliate_lastname', 'affiliate_firstname', 'affiliate_company', 'affiliate_address', 'affiliate_city', 'affiliate_zip', 'affilaite_email', 'affiliate_orias', 'affiliate_tel', 'affiliate_ref'
     ];

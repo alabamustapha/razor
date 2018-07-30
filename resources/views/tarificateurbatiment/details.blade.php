@@ -16,10 +16,8 @@
                         <ul>
                             @if($tarif_bat->type_product == 4)
                                 <li><a class="btn-orange-a" target="_blank" href="{{url('devis_bat_groupama?id='.$tarif_bat->id)}}">Télécharger le devis</a></li>
-
                             @else
-
-                                <li><a class="btn-orange-a" target="_blank" href="{{url('devis_bat?id='.$tarif_bat->id)}}">Télécharger le devis</a></li>
+                                <li><a class="btn-orange-a" target="_blank" href="{{url('activia_pdf?id='.$tarif_bat->id)}}">Télécharger le devis</a></li>
 
                             @endif
                             @if(App\Models\TarificateurBatiment::search_status($tarif_bat->status, "30-"))
