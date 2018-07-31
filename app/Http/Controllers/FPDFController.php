@@ -557,7 +557,7 @@ class FPDFController extends Controller
         $this->activia_pdf->Ln();
 
         $this->activia_pdf->Cell(50, 5, utf8_decode("Surface développée (en m²) :"), 1, 0, 'LT', true);
-        $this->activia_pdf->Cell(45, 5, '', 1, 0, 'L', true);
+        $this->activia_pdf->Cell(45, 5, $product['surface_of_property'], 1, 0, 'L', true);
         $this->activia_pdf->Cell(50, 5, utf8_decode("Année de construction :"), 1, 0, 'L', true);
         $this->activia_pdf->Cell(45, 5, '', 1, 0, 'L', true);
         $this->activia_pdf->Ln();
@@ -582,21 +582,20 @@ class FPDFController extends Controller
 
         $activia_options = activia_options();
         
-        // dd($activia_options);
         $this->activia_pdf->Table_entete(utf8_decode("Spécificités techniques du bâtiment assuré :"));
         $this->activia_pdf->Cell(65, 5, utf8_decode("Construction matériaux durs < 90 % :"), 1, 0, 'LT', true);
         // $this->activia_pdf->Cell(65, 5, "Construction < 50 % mat durs :", 1, 0, 'LT', true);
         // $this->activia_pdf->Cell(30, 5, 'Non', 1, 0, 'L', true);
-        $this->activia_pdf->Cell(30, 5, $activia_options[1]['value'] ? 'Oui' : 'Non', 1, 0, 'L', true);
+        $this->activia_pdf->Cell(30, 5, $product['options']['activia_option_2'] == 1 ? 'Oui' : 'Non', 1, 0, 'L', true);
         $this->activia_pdf->Cell(65, 5, utf8_decode("Utilisation d'un chalumeau :"), 1, 0, 'LT', true);
         // $this->activia_pdf->Cell(65, 5, "Vitres de plus de 3 m2 :", 1, 0, 'LT', true);
-        $this->activia_pdf->Cell(30, 5, $activia_options[8]['value'] ? 'Oui' : 'Non', 1, 0, 'L', true);
+        $this->activia_pdf->Cell(30, 5, $product['options']['activia_option_9'] == 1 ? 'Oui' : 'Non', 1, 0, 'L', true);
         $this->activia_pdf->Ln();
         $this->activia_pdf->Cell(65, 5, utf8_decode("Couverture < 90 % mat durs :"), 1, 0, 'LT', true);
-        $this->activia_pdf->Cell(30, 5, $activia_options[3]['value'] ? 'Oui' : 'Non', 1, 0, 'L', true);
+        $this->activia_pdf->Cell(30, 5, $product['options']['activia_option_4'] == 1 ? 'Oui' : 'Non', 1, 0, 'L', true);
         // $this->activia_pdf->Cell(65, 5, utf8_decode("Ren à recours contre état :"), 1, 0, 'L', true);
         $this->activia_pdf->Cell(65, 5, utf8_decode("Renonciation à recours :"), 1, 0, 'L', true);
-        $this->activia_pdf->Cell(30, 5, $activia_options[7]['value'] ? 'Oui' : 'Non', 1, 0, 'L', true);
+        $this->activia_pdf->Cell(30, 5, $product['options']['activia_option_8'] ? 'Oui' : 'Non', 1, 0, 'L', true);
         $this->activia_pdf->Ln();
         
         //---------------------------------------------------------------------------//

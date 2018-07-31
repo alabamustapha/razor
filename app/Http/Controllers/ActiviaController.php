@@ -120,7 +120,7 @@ class ActiviaController extends Controller
             'activia_option_15' => $request->activia_option_15,
             'activia_option_16' => $request->activia_option_16,
             'activia_option_17' => $request->activia_option_17,
-            'activia_option_17' => $request->activia_option_18
+            'activia_option_18' => $request->activia_option_18
         ];
 
         $activia_result = [

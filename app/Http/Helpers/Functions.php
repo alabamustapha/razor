@@ -635,8 +635,8 @@ function activia_options(){
         ['name' => "Responsabilité civile propriétaire d'immeuble", 'value' => 1, 'show' => 0],
         ['name' => "H1 - Bâtiment (réponse O/N)", 'value' => 1, 'show' => 0],
         ['name' => "Sans franchise", 'value' => 0, 'show' => 1],
-        ['name' => "B2 - Pack tempête (réponse O/N)", 'value' => 0, 'show' => 0],
-        ['name' => "Application d'une franchise supplémentaire de 2/7 d'indice", 'value' => 0, 'show' => 0],
+        ['name' => "B2 - Pack tempête (réponse O/N)", 'value' => 1, 'show' => 0],
+        ['name' => "Application d'une franchise supplémentaire de 2/7 d'indice", 'value' => 1, 'show' => 0],
         ['name' => "Pluralité de garanties (>6 garanties)", 'value' => 0, 'show' => 0],
         ['name' => "Batiment catégorie 1", 'value' => 0, 'show' => 1]
     ];
