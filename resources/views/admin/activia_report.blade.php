@@ -202,16 +202,18 @@
                 dom: '<"html5buttons"B>lTfgitp',
                 
                 buttons: [
-                    {extend: 'csv', title: 'Report', text: 'Téléchager l\'extraction',},
+                    {extend: 'excel', title: 'Report', text: 'Téléchager l\'extraction',},
                 ],
+
+            
                 language:{
-                    "decimal":        "",
+                    "decimal": ",",
                     "emptyTable":     "No data available in table",
                     "info":           "affichage _START_ to _END_ of _TOTAL_ entrées",
                     "infoEmpty":      "affichage 0 to 0 of 0 entrées",
                     "infoFiltered":   "(filtered from _MAX_ total entrées)",
                     "infoPostFix":    "",
-                    "thousands":      ",",
+                    "thousands":      ".",
                     "lengthMenu":     "Afficher _MENU_ entrées",
                     "loadingRecords": "chargement...",
                     "processing":     "En traitement...",
